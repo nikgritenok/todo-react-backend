@@ -9,5 +9,8 @@ export default defineConfig({
         additionalData: `@import "src/styles/variables";`,
       },
     },
+    modules: {
+      localsConvention: "camelCase",
+    },
   },
 });

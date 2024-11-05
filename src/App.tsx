@@ -1,5 +1,11 @@
+import { TaskInput } from "./components/taskinput/taskInput";
+
 function App() {
-  return <>testes</>;
+  return (
+    <>
+      <TaskInput />
+    </>
+  );
 }
 
 export default App;
