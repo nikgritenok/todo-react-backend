@@ -1,4 +1,5 @@
-@import "reset";
-@import "mixins";
+@use "reset";
+@use "mixins";
+@use "variables";
 
-@import "app";
+@use "app";

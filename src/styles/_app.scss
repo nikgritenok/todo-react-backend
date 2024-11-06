@@ -1,3 +1,5 @@
+@use "./variables" as *;
+
 #root {
   background-color: $background-color;
   width: 100vw;
@@ -7,5 +9,3 @@
   align-items: center;
   position: relative;
 }
-
-
