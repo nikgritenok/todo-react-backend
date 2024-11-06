@@ -15,11 +15,9 @@ export const TaskInput: React.FC = () => {
 
   const handleAddClick = () => {
     if (title.trim() && about.trim()) {
-      console.log("Title:", title);
-      console.log("About:", about);
       // Если есть функция для добавления задачи, можно вызвать её здесь
       // onAddTask(title, about);
-      setTitle(""); // Сбрасываем поля после добавления
+      setTitle(""); 
       setAbout("");
     } else {
       alert("Пожалуйста, заполните все поля");
