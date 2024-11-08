@@ -1,14 +1,15 @@
 @use "/src/styles/variables" as *;
+@use "src/styles/mixins" as *;
 
-.task-element {
+.task-container {
   display: flex;
   flex-direction: column;
   width: 90vw;
   max-width: 500px;
-  .task-container {
+  .task-item {
     padding: 10px;
     border-radius: 8px;
-    //@include mixins.color();
+    @include color();
     border: 1px solid $border-color;
     background-color: #242320;
     box-sizing: border-box;
@@ -17,6 +18,11 @@
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
+
+    &:hover {
+      @include focus-color();
+    }
+
     &-text {
       max-width: 80%;
       display: flex;
@@ -39,19 +45,16 @@
     }
     .delete-button {
       padding: 8px 12px;
-      //@include mixins.color();
+      @include color();
       color: $border-color;
       border-radius: 4px;
       cursor: pointer;
       font-size: 16px;
       box-sizing: border-box;
+
+      &:hover {
+        @include focus-color();
+      }
     }
-    .delete-button:focus {
-      color: $focus-color;
-      //@include mixins.focus-color();
-    }
-  }
-  .task-container:focus {
-    //@include mixins.focus-color();
   }
 }
