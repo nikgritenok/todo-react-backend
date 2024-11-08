@@ -3,7 +3,8 @@ import { useDispatch } from "react-redux";
 import { deleteTask } from "../../features/tasks/taskSlice";
 import { ITask } from "../../features/tasks/taskTypes";
 import styles from "./taskItem.module.scss";
-import { on } from "events";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 
 interface TaskProps {
   task: ITask;
@@ -11,6 +12,16 @@ interface TaskProps {
 
 export const Task: React.FC<TaskProps> = ({ task }) => {
   const dispatch = useDispatch();
+
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({
+      id: task.id,
+    });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
 
   const [isClick, setIsClick] = React.useState(false);
 
@@ -25,7 +36,14 @@ export const Task: React.FC<TaskProps> = ({ task }) => {
   };
 
   return (
-    <div className={styles["task-item"]} onClick={handleClick}>
+    <div
+      className={styles["task-item"]}
+      onClick={handleClick}
+      ref={setNodeRef}
+      {...attributes}
+      style={style}
+      {...listeners}
+    >
       <div className={styles["task-item-text"]}>
         <h3>{task.title}</h3>
         <p>{task.about}</p>

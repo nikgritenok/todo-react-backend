@@ -7,7 +7,7 @@ const loadTasksFromLocalStorage = (): ITask[] => {
 };
 
 const initialState: { tasks: ITask[] } = {
-  tasks: loadTasksFromLocalStorage(), 
+  tasks: loadTasksFromLocalStorage(),
 };
 
 const taskSlice = createSlice({
@@ -16,7 +16,7 @@ const taskSlice = createSlice({
   reducers: {
     addTask: (state, action: PayloadAction<ITask>) => {
       state.tasks.push(action.payload);
-      localStorage.setItem("tasks", JSON.stringify(state.tasks)); 
+      localStorage.setItem("tasks", JSON.stringify(state.tasks));
     },
 
     deleteTask: (state, action: PayloadAction<number>) => {
@@ -30,12 +30,17 @@ const taskSlice = createSlice({
       );
       if (index !== -1) {
         state.tasks[index] = action.payload;
-        localStorage.setItem("tasks", JSON.stringify(state.tasks)); 
+        localStorage.setItem("tasks", JSON.stringify(state.tasks));
       }
+    },
+
+    setTasks: (state, action: PayloadAction<ITask[]>) => {
+      state.tasks = action.payload;
+      localStorage.setItem("tasks", JSON.stringify(state.tasks));
     },
   },
 });
 
-export const { addTask, deleteTask, updateTask } = taskSlice.actions;
+export const { addTask, deleteTask, updateTask, setTasks } = taskSlice.actions;
 
 export default taskSlice.reducer;
