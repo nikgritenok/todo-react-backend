@@ -1,40 +1,36 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Task } from "./taskTypes";
+import { ITask } from "./taskTypes";
 
-// Функция для загрузки задач из localStorage
-const loadTasksFromLocalStorage = (): Task[] => {
+const loadTasksFromLocalStorage = (): ITask[] => {
   const storedTasks = localStorage.getItem("tasks");
   return storedTasks ? JSON.parse(storedTasks) : [];
 };
 
-// Начальное состояние
-const initialState: { tasks: Task[] } = {
-  tasks: loadTasksFromLocalStorage(), // Загружаем задачи при старте
+const initialState: { tasks: ITask[] } = {
+  tasks: loadTasksFromLocalStorage(), 
 };
 
-// Слайс для задач
 const taskSlice = createSlice({
   name: "tasks",
   initialState,
   reducers: {
-    // Добавление задачи
-    addTask: (state, action: PayloadAction<Task>) => {
+    addTask: (state, action: PayloadAction<ITask>) => {
       state.tasks.push(action.payload);
-      localStorage.setItem("tasks", JSON.stringify(state.tasks)); // Сохраняем в localStorage
+      localStorage.setItem("tasks", JSON.stringify(state.tasks)); 
     },
-    // Удаление задачи
+
     deleteTask: (state, action: PayloadAction<number>) => {
       state.tasks = state.tasks.filter((task) => task.id !== action.payload);
-      localStorage.setItem("tasks", JSON.stringify(state.tasks)); // Сохраняем в localStorage
+      localStorage.setItem("tasks", JSON.stringify(state.tasks));
     },
-    // Обновление задачи
-    updateTask: (state, action: PayloadAction<Task>) => {
+
+    updateTask: (state, action: PayloadAction<ITask>) => {
       const index = state.tasks.findIndex(
         (task) => task.id === action.payload.id
       );
       if (index !== -1) {
         state.tasks[index] = action.payload;
-        localStorage.setItem("tasks", JSON.stringify(state.tasks)); // Сохраняем в localStorage
+        localStorage.setItem("tasks", JSON.stringify(state.tasks)); 
       }
     },
   },

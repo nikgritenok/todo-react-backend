@@ -1,9 +1,9 @@
-export interface Task {
+export interface ITask {
   id: number;
   title: string;
   about: string;
 }
 
 export interface TaskState {
-  tasks: Task[];
+  tasks: ITask[];
 }

@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import styles from "./TaskInput.module.scss";
 import { addTask } from "../../features/tasks/taskSlice";
-import { Task } from "../../features/tasks/taskTypes";
+import { ITask } from "../../features/tasks/taskTypes";
 
 export const TaskInput: React.FC = () => {
   const [title, setTitle] = useState<string>("");
@@ -29,7 +29,7 @@ export const TaskInput: React.FC = () => {
       handleAddClick();
     }
     if (e.key === "ArrowDown") {
-      e.preventDefault(); // Предотвращаем стандартное поведение клавиши
+      e.preventDefault();
       if (currentRef === titleRef) aboutRef.current?.focus();
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
@@ -39,7 +39,7 @@ export const TaskInput: React.FC = () => {
 
   const handleAddClick = () => {
     if (title.trim() && about.trim()) {
-      const newTask: Task = {
+      const newTask: ITask = {
         id: Date.now(),
         title,
         about,
@@ -48,6 +48,7 @@ export const TaskInput: React.FC = () => {
 
       setTitle("");
       setAbout("");
+      titleRef.current?.focus();
     } else {
       alert("Пожалуйста, заполните все поля");
     }
