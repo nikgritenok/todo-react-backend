@@ -1,9 +1,14 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import styles from "./TaskInput.module.scss";
+import { addTask } from "../../features/tasks/taskSlice";
+import { Task } from "../../features/tasks/taskTypes";
 
 export const TaskInput: React.FC = () => {
   const [title, setTitle] = useState<string>("");
   const [about, setAbout] = useState<string>("");
+
+  const dispatch = useDispatch(); // Создаем dispatch
 
   const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
@@ -15,8 +20,13 @@ export const TaskInput: React.FC = () => {
 
   const handleAddClick = () => {
     if (title.trim() && about.trim()) {
-      // Если есть функция для добавления задачи, можно вызвать её здесь
-      // onAddTask(title, about);
+      const newTask: Task = {
+        id: Date.now(), // Генерируем уникальный ID
+        title,
+        about,
+      };
+      dispatch(addTask(newTask)); // Отправляем задачу в Redux Store
+      
       setTitle("");
       setAbout("");
     } else {

@@ -1,0 +1,57 @@
+@use "/src/styles/variables" as *;
+
+.task-element {
+  display: flex;
+  flex-direction: column;
+  width: 90vw;
+  max-width: 500px;
+  .task-container {
+    padding: 10px;
+    border-radius: 8px;
+    //@include mixins.color();
+    border: 1px solid $border-color;
+    background-color: #242320;
+    box-sizing: border-box;
+    margin: 20px 0 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    &-text {
+      max-width: 80%;
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+      color: #f0e3caa3;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      h3 {
+        font-family: "Roboto";
+        font-size: 22px;
+        font-weight: 500;
+      }
+      p {
+        font-family: "Roboto";
+        font-size: 14px;
+      }
+    }
+    .delete-button {
+      padding: 8px 12px;
+      //@include mixins.color();
+      color: $border-color;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+    .delete-button:focus {
+      color: $focus-color;
+      //@include mixins.focus-color();
+    }
+  }
+  .task-container:focus {
+    //@include mixins.focus-color();
+  }
+}
