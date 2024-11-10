@@ -15,9 +15,7 @@ export const InfoButton: React.FC<TaskProps> = ({ task }) => {
 
   return (
     <>
-      <button className={styles["info_button"]} onClick={openModal}>
-        i
-      </button>
+      <button className={styles["info_button"]}>i</button>
       <EditTaskModal isOpen={isModalOpen} onClose={closeModal} task={task} />
     </>
   );
