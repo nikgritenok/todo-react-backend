@@ -28,6 +28,11 @@ export const EditTaskModal: React.FC<IModalProps> = ({
   }, [isOpen]);
 
   const handleSave = () => {
+    if (!title.trim() || !about.trim()) {
+      alert("Пожалуйста, заполните все поля");
+      return;
+    }
+
     if (task) {
       const updatedTask = { ...task, title, about };
 
@@ -75,7 +80,7 @@ export const EditTaskModal: React.FC<IModalProps> = ({
 
         <textarea
           className={styles["edit-about"]}
-          value={task?.about}
+          value={about}
           onChange={(e) => setAbout(e.target.value)}
           onKeyDown={(e) => handleKeyDown(e, aboutRef)}
           ref={aboutRef}
