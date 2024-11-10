@@ -11,4 +11,5 @@ export interface TaskState {
 export interface IModalProps {
   isOpen: boolean;
   onClose: () => void;
+  task?: ITask;
 }

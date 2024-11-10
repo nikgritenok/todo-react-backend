@@ -4,7 +4,6 @@ import { deleteTask } from "../../features/tasks/taskSlice";
 import { ITask } from "../../features/tasks/taskTypes";
 import styles from "./taskItem.module.scss";
 import { useSortable } from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
 import { TaskActions } from "../taskActions/taskActions";
 
 interface TaskProps {
@@ -36,6 +35,7 @@ export const Task: React.FC<TaskProps> = ({ task }) => {
 
   const handleClick = () => {
     setIsClick((prev) => !prev);
+    console.log(task);
     console.log(isClick);
   };
 
@@ -55,7 +55,7 @@ export const Task: React.FC<TaskProps> = ({ task }) => {
           x
         </button>
       </div>
-      <div>{isClick && <TaskActions></TaskActions>}</div>
+      <div>{isClick && <TaskActions task={task}></TaskActions>}</div>
     </div>
   );
 };
