@@ -3,7 +3,7 @@ import { ITask } from "../../features/tasks/taskTypes";
 import styles from "./taskItem.module.scss";
 import { useSortable } from "@dnd-kit/sortable";
 import { TaskActions } from "../taskActions/taskActions";
-import { DeleteButton } from "../buttons/deleteButton/deleteButton";
+import { DeleteButton } from "../Buttons/deleteButton/deleteButton";
 
 interface TaskProps {
   task: ITask;

@@ -1,7 +1,7 @@
 import styles from "./taskActions.module.scss";
-import { ShareButton } from "../buttons/shareButton/shareButton";
-import { EditButton } from "../buttons/editButton/editButton";
-import { InfoButton } from "../buttons/infoButton/infoButton";
+import { ShareButton } from "../Buttons/shareButton/shareButton";
+import { EditButton } from "../Buttons/editButton/editButton";
+import { InfoButton } from "../Buttons/infoButton/infoButton";
 import { ITask } from "../../features/tasks/taskTypes";
 
 interface TaskProps {
