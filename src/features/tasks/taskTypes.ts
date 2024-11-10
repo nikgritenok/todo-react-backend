@@ -7,3 +7,8 @@ export interface ITask {
 export interface TaskState {
   tasks: ITask[];
 }
+
+export interface IModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
