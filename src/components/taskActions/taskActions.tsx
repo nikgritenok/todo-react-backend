@@ -1,6 +1,7 @@
 import styles from "./taskActions.module.scss";
-import { ShareButton } from "../Buttons/shareButton/shareButton";
-import { EditButton } from "../Buttons/editButton/editButton";
+import { ShareButton } from "../buttons/shareButton/shareButton";
+import { EditButton } from "../buttons/editButton/editButton";
+import { InfoButton } from "../buttons/infoButton/infoButton";
 import { ITask } from "../../features/tasks/taskTypes";
 
 interface TaskProps {
@@ -12,7 +13,7 @@ export const TaskActions: React.FC<TaskProps> = ({ task }) => {
     <div className={styles["task-actions"]}>
       <div className={styles["block-buttons"]}>
         <ShareButton />
-        <button className={styles["block-buttons__button"]}>i</button>
+        <InfoButton task={task} />
         <EditButton task={task} />
       </div>
     </div>

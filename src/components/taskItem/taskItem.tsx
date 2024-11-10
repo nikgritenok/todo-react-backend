@@ -1,18 +1,15 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { deleteTask } from "../../features/tasks/taskSlice";
 import { ITask } from "../../features/tasks/taskTypes";
 import styles from "./taskItem.module.scss";
 import { useSortable } from "@dnd-kit/sortable";
 import { TaskActions } from "../taskActions/taskActions";
+import { DeleteButton } from "../buttons/deleteButton/deleteButton";
 
 interface TaskProps {
   task: ITask;
 }
 
 export const Task: React.FC<TaskProps> = ({ task }) => {
-  const dispatch = useDispatch();
-
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({
       id: task.id,
@@ -27,16 +24,9 @@ export const Task: React.FC<TaskProps> = ({ task }) => {
 
   const [isClick, setIsClick] = React.useState(false);
 
-  const handleDelete = (e: React.MouseEvent) => {
+  const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
-    console.log(task.id);
-    dispatch(deleteTask(task.id));
-  };
-
-  const handleClick = () => {
     setIsClick((prev) => !prev);
-    console.log(task);
-    console.log(isClick);
   };
 
   return (
@@ -51,9 +41,7 @@ export const Task: React.FC<TaskProps> = ({ task }) => {
           <h3>{task.title}</h3>
           <p>{task.about}</p>
         </div>
-        <button className={styles["delete-button"]} onClick={handleDelete}>
-          x
-        </button>
+        <DeleteButton task={task} />
       </div>
       <div>{isClick && <TaskActions task={task}></TaskActions>}</div>
     </div>
