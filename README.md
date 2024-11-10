@@ -1,5 +1,7 @@
 # To-Do List Application
 
+![Coverimage](src/assets/icon/image.png)
+
 This is a modern To-Do List application built using React, TypeScript, Redux, and Yarn. The application allows users to add, edit, delete tasks, and manage their to-do list interactively with the added feature of drag-and-drop task reordering.
 
 ## Features
