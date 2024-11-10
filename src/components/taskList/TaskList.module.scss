@@ -8,33 +8,4 @@
   max-width: 500px;
 }
 
-.no-task-message {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 200px;
 
-  &__text {
-    font-family: "Roboto";
-    font-size: 24px;
-    color: #ffffff;
-
-    &::before,
-    &::after {
-      content: "";
-      display: block;
-      width: 64px;
-      height: 3px;
-      background-color: $focus-color;
-      margin: 0 auto;
-      border-radius: 3px;
-    }
-
-    &::before {
-      margin-bottom: 10px;
-    }
-    &::after {
-      margin-top: 10px;
-    }
-  }
-}

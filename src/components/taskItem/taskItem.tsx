@@ -5,6 +5,7 @@ import { ITask } from "../../features/tasks/taskTypes";
 import styles from "./taskItem.module.scss";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { TaskActions } from "../taskActions/taskActions";
 
 interface TaskProps {
   task: ITask;
@@ -19,7 +20,9 @@ export const Task: React.FC<TaskProps> = ({ task }) => {
     });
 
   const style = {
-    transform: CSS.Transform.toString(transform),
+    transform: `translate3d(${transform?.x || 0}px, ${
+      transform?.y || 0
+    }px, 0) scaleY(1)`,
     transition,
   };
 
@@ -27,30 +30,32 @@ export const Task: React.FC<TaskProps> = ({ task }) => {
 
   const handleDelete = (e: React.MouseEvent) => {
     e.stopPropagation();
+    console.log(task.id);
     dispatch(deleteTask(task.id));
   };
 
   const handleClick = () => {
-    setIsClick(!isClick);
+    setIsClick((prev) => !prev);
     console.log(isClick);
   };
 
   return (
     <div
-      className={styles["task-item"]}
-      onClick={handleClick}
+      className="task-item-wrap"
       ref={setNodeRef}
       {...attributes}
       style={style}
-      {...listeners}
     >
-      <div className={styles["task-item-text"]}>
-        <h3>{task.title}</h3>
-        <p>{task.about}</p>
+      <div className={styles["task-item"]} onClick={handleClick} {...listeners}>
+        <div className={styles["task-item-text"]}>
+          <h3>{task.title}</h3>
+          <p>{task.about}</p>
+        </div>
+        <button className={styles["delete-button"]} onClick={handleDelete}>
+          x
+        </button>
       </div>
-      <button className={styles["delete-button"]} onClick={handleDelete}>
-        x
-      </button>
+      <div>{isClick && <TaskActions></TaskActions>}</div>
     </div>
   );
 };
