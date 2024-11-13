@@ -1,20 +1,20 @@
-import React, { useState } from "react";
-import styles from "./deleteButton.module.scss";
-import { ITask } from "../../../features/tasks/taskTypes";
-import { DeleteModal } from "../../modals/deleteTaskModal/deleteTaskModal";
+import React, { useState } from "react"
+import styles from "./deleteButton.module.scss"
+import { ITask } from "../../../features/tasks/taskTypes"
+import { DeleteModal } from "../../modals/deleteTaskModal/deleteTaskModal"
 
 interface TaskProps {
-  task: ITask;
+  task: ITask
 }
 
 export const DeleteButton: React.FC<TaskProps> = ({ task }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   const openModal = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setIsModalOpen(true);
-  };
-  const closeModal = () => setIsModalOpen(false);
+    e.stopPropagation()
+    setIsModalOpen(true)
+  }
+  const closeModal = () => setIsModalOpen(false)
 
   return (
     <>
@@ -23,5 +23,5 @@ export const DeleteButton: React.FC<TaskProps> = ({ task }) => {
       </button>
       <DeleteModal isOpen={isModalOpen} onClose={closeModal} task={task} />
     </>
-  );
-};
+  )
+}

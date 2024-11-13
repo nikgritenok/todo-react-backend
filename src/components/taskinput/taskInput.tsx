@@ -1,41 +1,41 @@
-import React, { useState, useRef } from "react";
-import { useDispatch } from "react-redux";
-import styles from "./TaskInput.module.scss";
-import { addTask } from "../../features/tasks/taskSlice";
-import { ITask } from "../../features/tasks/taskTypes";
+import React, { useState, useRef } from "react"
+import { useDispatch } from "react-redux"
+import styles from "./TaskInput.module.scss"
+import { addTask } from "../../features/tasks/taskSlice"
+import { ITask } from "../../features/tasks/taskTypes"
 
 export const TaskInput: React.FC = () => {
-  const [title, setTitle] = useState<string>("");
-  const [about, setAbout] = useState<string>("");
-  const titleRef = useRef<HTMLInputElement>(null);
-  const aboutRef = useRef<HTMLInputElement>(null);
+  const [title, setTitle] = useState<string>("")
+  const [about, setAbout] = useState<string>("")
+  const titleRef = useRef<HTMLInputElement>(null)
+  const aboutRef = useRef<HTMLInputElement>(null)
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTitle(event.target.value);
-  };
+    setTitle(event.target.value)
+  }
 
   const handleAboutChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setAbout(event.target.value);
-  };
+    setAbout(event.target.value)
+  }
 
   const handleKeyDown = (
     e: React.KeyboardEvent,
-    currentRef: React.RefObject<HTMLInputElement>
+    currentRef: React.RefObject<HTMLInputElement>,
   ) => {
     if (e.key === "Enter") {
-      e.preventDefault();
-      handleAddClick();
+      e.preventDefault()
+      handleAddClick()
     }
     if (e.key === "ArrowDown") {
-      e.preventDefault();
-      if (currentRef === titleRef) aboutRef.current?.focus();
+      e.preventDefault()
+      if (currentRef === titleRef) aboutRef.current?.focus()
     } else if (e.key === "ArrowUp") {
-      e.preventDefault();
-      if (currentRef === aboutRef) titleRef.current?.focus();
+      e.preventDefault()
+      if (currentRef === aboutRef) titleRef.current?.focus()
     }
-  };
+  }
 
   const handleAddClick = () => {
     if (title.trim() && about.trim()) {
@@ -43,16 +43,16 @@ export const TaskInput: React.FC = () => {
         id: Date.now(),
         title,
         about,
-      };
-      dispatch(addTask(newTask));
+      }
+      dispatch(addTask(newTask))
 
-      setTitle("");
-      setAbout("");
-      titleRef.current?.focus();
+      setTitle("")
+      setAbout("")
+      titleRef.current?.focus()
     } else {
-      alert("Пожалуйста, заполните все поля");
+      alert("Пожалуйста, заполните все поля")
     }
-  };
+  }
 
   return (
     <div className={styles["task-input-container"]}>
@@ -78,5 +78,5 @@ export const TaskInput: React.FC = () => {
         +
       </button>
     </div>
-  );
-};
+  )
+}

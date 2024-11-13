@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import icon_share from "../../../assets/icon/icon_share.svg";
-import { ShareModal } from "../../modals/shareModal/shareModal";
-import styles from "./shareButton.module.scss";
+import React, { useState } from "react"
+import icon_share from "../../../assets/icon/icon_share.svg"
+import { ShareModal } from "../../modals/shareModal/shareModal"
+import styles from "./shareButton.module.scss"
 
 export const ShareButton: React.FC = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
+  const openModal = () => setIsModalOpen(true)
+  const closeModal = () => setIsModalOpen(false)
 
   return (
     <>
@@ -16,5 +16,5 @@ export const ShareButton: React.FC = () => {
       </button>
       <ShareModal isOpen={isModalOpen} onClose={closeModal} />
     </>
-  );
-};
+  )
+}

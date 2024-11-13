@@ -1,33 +1,33 @@
-import React from "react";
-import { ITask } from "../../features/tasks/taskTypes";
-import styles from "./taskItem.module.scss";
-import { useSortable } from "@dnd-kit/sortable";
-import { TaskActions } from "../taskActions/taskActions";
-import { DeleteButton } from "../Buttons/deleteButton/deleteButton";
+import React from "react"
+import { ITask } from "../../features/tasks/taskTypes"
+import styles from "./taskItem.module.scss"
+import { useSortable } from "@dnd-kit/sortable"
+import { TaskActions } from "../taskActions/taskActions"
+import { DeleteButton } from "../Buttons/deleteButton/deleteButton"
 
 interface TaskProps {
-  task: ITask;
+  task: ITask
 }
 
 export const Task: React.FC<TaskProps> = ({ task }) => {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({
       id: task.id,
-    });
+    })
 
   const style = {
     transform: `translate3d(${transform?.x || 0}px, ${
       transform?.y || 0
     }px, 0) scaleY(1)`,
     transition,
-  };
+  }
 
-  const [isClick, setIsClick] = React.useState(false);
+  const [isClick, setIsClick] = React.useState(false)
 
   const handleClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setIsClick((prev) => !prev);
-  };
+    e.stopPropagation()
+    setIsClick((prev) => !prev)
+  }
 
   return (
     <div
@@ -45,5 +45,5 @@ export const Task: React.FC<TaskProps> = ({ task }) => {
       </div>
       <div>{isClick && <TaskActions task={task}></TaskActions>}</div>
     </div>
-  );
-};
+  )
+}

@@ -1,5 +1,5 @@
-import { TaskInput } from "./components/taskinput/taskInput";
-import { TaskList } from "./components/taskList/TaskList";
+import { TaskInput } from "./components/taskinput/taskInput"
+import { TaskList } from "./components/taskList/TaskList"
 
 function App() {
   return (
@@ -7,7 +7,7 @@ function App() {
       <TaskInput />
       <TaskList />
     </>
-  );
+  )
 }
 
-export default App;
+export default App

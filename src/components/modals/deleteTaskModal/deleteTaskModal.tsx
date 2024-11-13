@@ -1,23 +1,23 @@
-import { IModalProps } from "../../../features/tasks/taskTypes";
-import styles from "./deleteTaskModal.module.scss";
-import Modal from "react-modal";
-import { useDispatch } from "react-redux";
-import { deleteTask } from "../../../features/tasks/taskSlice";
+import { IModalProps } from "../../../features/tasks/taskTypes"
+import styles from "./deleteTaskModal.module.scss"
+import Modal from "react-modal"
+import { useDispatch } from "react-redux"
+import { deleteTask } from "../../../features/tasks/taskSlice"
 
-Modal.setAppElement("#root");
+Modal.setAppElement("#root")
 
 export const DeleteModal: React.FC<IModalProps> = ({
   isOpen,
   onClose,
   task,
 }) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   const handleDelete = () => {
     if (task) {
-      dispatch(deleteTask(task?.id));
+      dispatch(deleteTask(task?.id))
     }
-  };
+  }
 
   return (
     <Modal
@@ -37,5 +37,5 @@ export const DeleteModal: React.FC<IModalProps> = ({
         </button>
       </div>
     </Modal>
-  );
-};
+  )
+}

@@ -1,5 +1,5 @@
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React from "react"
+import { useSelector, useDispatch } from "react-redux"
 import {
   closestCorners,
   DndContext,
@@ -9,35 +9,35 @@ import {
   TouchSensor,
   useSensor,
   useSensors,
-} from "@dnd-kit/core";
+} from "@dnd-kit/core"
 import {
   SortableContext,
   verticalListSortingStrategy,
   arrayMove,
-} from "@dnd-kit/sortable";
-import { restrictToWindowEdges } from "@dnd-kit/modifiers";
+} from "@dnd-kit/sortable"
+import { restrictToWindowEdges } from "@dnd-kit/modifiers"
 
-import { RootState } from "../../store";
-import { Task } from "../taskItem/taskItem";
-import { setTasks } from "../../features/tasks/taskSlice";
-import styles from "./taskList.module.scss";
-import { NoTaskMessage } from "../noTaskMessage/noTaskMessage";
+import { RootState } from "../../store"
+import { Task } from "../taskItem/taskItem"
+import { setTasks } from "../../features/tasks/taskSlice"
+import styles from "./taskList.module.scss"
+import { NoTaskMessage } from "../noTaskMessage/noTaskMessage"
 
 export const TaskList: React.FC = () => {
-  const dispatch = useDispatch();
-  const tasks = useSelector((state: RootState) => state.tasks.tasks);
+  const dispatch = useDispatch()
+  const tasks = useSelector((state: RootState) => state.tasks.tasks)
 
   const handleDragEnd = (event: DragEndEvent) => {
-    const { active, over } = event;
+    const { active, over } = event
 
     if (over && active.id !== over.id) {
-      const oldIndex = tasks.findIndex((task) => task.id === active.id);
-      const newIndex = tasks.findIndex((task) => task.id === over.id);
+      const oldIndex = tasks.findIndex((task) => task.id === active.id)
+      const newIndex = tasks.findIndex((task) => task.id === over.id)
 
-      const newTasks = arrayMove(tasks, oldIndex, newIndex);
-      dispatch(setTasks(newTasks));
+      const newTasks = arrayMove(tasks, oldIndex, newIndex)
+      dispatch(setTasks(newTasks))
     }
-  };
+  }
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -54,8 +54,8 @@ export const TaskList: React.FC = () => {
       activationConstraint: {
         distance: 5,
       },
-    })
-  );
+    }),
+  )
 
   return (
     <DndContext
@@ -76,5 +76,5 @@ export const TaskList: React.FC = () => {
         )}
       </div>
     </DndContext>
-  );
-};
+  )
+}

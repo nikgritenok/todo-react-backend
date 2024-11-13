@@ -1,63 +1,63 @@
-import { IModalProps } from "../../../features/tasks/taskTypes";
-import styles from "./editTaskModal.module.scss";
-import Modal from "react-modal";
-import { useState, useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
-import { updateTask } from "../../../features/tasks/taskSlice";
+import { IModalProps } from "../../../features/tasks/taskTypes"
+import styles from "./editTaskModal.module.scss"
+import Modal from "react-modal"
+import { useState, useEffect, useRef } from "react"
+import { useDispatch } from "react-redux"
+import { updateTask } from "../../../features/tasks/taskSlice"
 
-Modal.setAppElement("#root");
+Modal.setAppElement("#root")
 
 export const EditTaskModal: React.FC<IModalProps> = ({
   isOpen,
   onClose,
   task,
 }) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
-  const [title, setTitle] = useState(task?.title || "");
-  const [about, setAbout] = useState(task?.about || "");
-  const titleRef = useRef<HTMLInputElement>(null);
-  const aboutRef = useRef<HTMLTextAreaElement>(null);
+  const [title, setTitle] = useState(task?.title || "")
+  const [about, setAbout] = useState(task?.about || "")
+  const titleRef = useRef<HTMLInputElement>(null)
+  const aboutRef = useRef<HTMLTextAreaElement>(null)
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      titleRef.current?.focus();
-    }, 0);
+      titleRef.current?.focus()
+    }, 0)
 
-    return () => clearTimeout(timer);
-  }, [isOpen]);
+    return () => clearTimeout(timer)
+  }, [isOpen])
 
   const handleSave = () => {
     if (!title.trim() || !about.trim()) {
-      alert("Пожалуйста, заполните все поля");
-      return;
+      alert("Пожалуйста, заполните все поля")
+      return
     }
 
     if (task) {
-      const updatedTask = { ...task, title, about };
+      const updatedTask = { ...task, title, about }
 
-      dispatch(updateTask(updatedTask));
+      dispatch(updateTask(updatedTask))
 
-      onClose();
+      onClose()
     }
-  };
+  }
 
   const handleKeyDown = (
     e: React.KeyboardEvent,
-    currentRef: React.RefObject<HTMLInputElement | HTMLTextAreaElement>
+    currentRef: React.RefObject<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     if (e.key === "ArrowDown") {
-      e.preventDefault();
+      e.preventDefault()
       if (currentRef.current === titleRef.current) {
-        aboutRef.current?.focus();
+        aboutRef.current?.focus()
       }
     } else if (e.key === "ArrowUp") {
-      e.preventDefault();
+      e.preventDefault()
       if (currentRef.current === aboutRef.current) {
-        titleRef.current?.focus();
+        titleRef.current?.focus()
       }
     }
-  };
+  }
 
   return (
     <Modal
@@ -95,5 +95,5 @@ export const EditTaskModal: React.FC<IModalProps> = ({
         </div>
       </div>
     </Modal>
-  );
-};
+  )
+}
