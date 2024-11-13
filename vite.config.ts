@@ -16,6 +16,7 @@ export default defineConfig({
         additionalData: `
       @use "sass:map";
       @use "/src/styles/variables.scss" as *;
+      @use "/src/styles/mixins.scss" as *;
     `,
       },
     },
