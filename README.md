@@ -58,8 +58,6 @@ This is a modern To-Do List application built using React, TypeScript, Redux, an
 src/
 │
 ├── components/          # Reusable components (e.g., Task, Modal, etc.)
-├── redux/               # Redux store, actions, reducers
 ├── styles/              # SCSS styles
-├── utils/               # Utility functions
 └── App.tsx              # Main App component
 ```
