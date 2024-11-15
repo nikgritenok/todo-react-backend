@@ -1,11 +1,7 @@
 import React, { useState } from "react"
 import styles from "./deleteButton.module.scss"
-import { ITask } from "../../../features/tasks/taskTypes"
+import { TaskProps } from "../../../features/tasks/taskTypes"
 import { DeleteModal } from "../../modals/deleteTaskModal/deleteTaskModal"
-
-interface TaskProps {
-  task: ITask
-}
 
 export const DeleteButton: React.FC<TaskProps> = ({ task }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)

@@ -1,15 +1,19 @@
-export interface ITask {
+export interface Task {
   id: number
   title: string
   about: string
 }
 
-export interface TaskState {
-  tasks: ITask[]
+export interface TaskProps {
+  task: Task
 }
 
-export interface IModalProps {
+export interface TasksState {
+  tasks: Task[]
+}
+
+export interface ModalProps {
   isOpen: boolean
   onClose: () => void
-  task?: ITask
+  task?: Task
 }

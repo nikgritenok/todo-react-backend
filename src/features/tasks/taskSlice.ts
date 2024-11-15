@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { ITask } from "./taskTypes"
+import { Task } from "./taskTypes"
 
-const loadTasksFromLocalStorage = (): ITask[] => {
+const loadTasksFromLocalStorage = (): Task[] => {
   const storedTasks = localStorage.getItem("tasks")
   return storedTasks ? JSON.parse(storedTasks) : []
 }
 
-const initialState: { tasks: ITask[] } = {
+const initialState: { tasks: Task[] } = {
   tasks: loadTasksFromLocalStorage(),
 }
 
@@ -14,7 +14,7 @@ const taskSlice = createSlice({
   name: "tasks",
   initialState,
   reducers: {
-    addTask: (state, action: PayloadAction<ITask>) => {
+    addTask: (state, action: PayloadAction<Task>) => {
       state.tasks.push(action.payload)
       localStorage.setItem("tasks", JSON.stringify(state.tasks))
     },
@@ -24,7 +24,7 @@ const taskSlice = createSlice({
       localStorage.setItem("tasks", JSON.stringify(state.tasks))
     },
 
-    updateTask: (state, action: PayloadAction<ITask>) => {
+    updateTask: (state, action: PayloadAction<Task>) => {
       const index = state.tasks.findIndex(
         (task) => task.id === action.payload.id,
       )
@@ -34,7 +34,7 @@ const taskSlice = createSlice({
       }
     },
 
-    setTasks: (state, action: PayloadAction<ITask[]>) => {
+    setTasks: (state, action: PayloadAction<Task[]>) => {
       state.tasks = action.payload
       localStorage.setItem("tasks", JSON.stringify(state.tasks))
     },

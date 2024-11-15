@@ -2,9 +2,9 @@ import React, { useState, useRef } from "react"
 import { useDispatch } from "react-redux"
 import styles from "./TaskInput.module.scss"
 import { addTask } from "../../features/tasks/taskSlice"
-import { ITask } from "../../features/tasks/taskTypes"
+import { Task } from "../../features/tasks/taskTypes"
 
-export const TaskInput: React.FC = () => {
+export const TaskInput = () => {
   const [title, setTitle] = useState<string>("")
   const [about, setAbout] = useState<string>("")
   const titleRef = useRef<HTMLInputElement>(null)
@@ -39,7 +39,7 @@ export const TaskInput: React.FC = () => {
 
   const handleAddClick = () => {
     if (title.trim() && about.trim()) {
-      const newTask: ITask = {
+      const newTask: Task = {
         id: Date.now(),
         title,
         about,

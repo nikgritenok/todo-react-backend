@@ -1,6 +1,6 @@
 import styles from "./shareModal.module.scss"
 import Modal from "react-modal"
-import { IModalProps } from "../../../features/tasks/taskTypes"
+import { ModalProps } from "../../../features/tasks/taskTypes"
 import icon_copy from "../../../assets/icon/icon_copy.svg"
 import icon_vk from "../../../assets/icon/icon_vk.svg"
 import icon_telegram from "../../../assets/icon/icon_telegram.svg"
@@ -8,7 +8,7 @@ import icon_whatsapp from "../../../assets/icon/icon_whatsapp.svg"
 import icon_facebook from "../../../assets/icon/icon_facebook.svg"
 
 Modal.setAppElement("#root")
-export const ShareModal: React.FC<IModalProps> = ({ isOpen, onClose }) => {
+export const ShareModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
   return (
     <Modal
       isOpen={isOpen}

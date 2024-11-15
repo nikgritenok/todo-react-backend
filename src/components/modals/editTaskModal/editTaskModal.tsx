@@ -1,4 +1,4 @@
-import { IModalProps } from "../../../features/tasks/taskTypes"
+import { ModalProps } from "../../../features/tasks/taskTypes"
 import styles from "./editTaskModal.module.scss"
 import Modal from "react-modal"
 import { useState, useEffect, useRef } from "react"
@@ -7,7 +7,7 @@ import { updateTask } from "../../../features/tasks/taskSlice"
 
 Modal.setAppElement("#root")
 
-export const EditTaskModal: React.FC<IModalProps> = ({
+export const EditTaskModal: React.FC<ModalProps> = ({
   isOpen,
   onClose,
   task,

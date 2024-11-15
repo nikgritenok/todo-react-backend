@@ -2,11 +2,7 @@ import React, { useState } from "react"
 import icon_edit from "../../../assets/icon/icon_edit.svg"
 import { EditTaskModal } from "../../modals/editTaskModal/editTaskModal"
 import styles from "./editButton.module.scss"
-import { ITask } from "../../../features/tasks/taskTypes"
-
-interface TaskProps {
-  task: ITask
-}
+import { TaskProps } from "../../../features/tasks/taskTypes"
 
 export const EditButton: React.FC<TaskProps> = ({ task }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)

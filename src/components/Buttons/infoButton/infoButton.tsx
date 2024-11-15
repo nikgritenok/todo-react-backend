@@ -1,11 +1,7 @@
 import React, { useState } from "react"
 import { EditTaskModal } from "../../modals/editTaskModal/editTaskModal"
 import styles from "./infoButton.module.scss"
-import { ITask } from "../../../features/tasks/taskTypes"
-
-interface TaskProps {
-  task: ITask
-}
+import { TaskProps } from "../../../features/tasks/taskTypes"
 
 export const InfoButton: React.FC<TaskProps> = ({ task }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)

@@ -1,4 +1,4 @@
-import { IModalProps } from "../../../features/tasks/taskTypes"
+import { ModalProps } from "../../../features/tasks/taskTypes"
 import styles from "./deleteTaskModal.module.scss"
 import Modal from "react-modal"
 import { useDispatch } from "react-redux"
@@ -6,7 +6,7 @@ import { deleteTask } from "../../../features/tasks/taskSlice"
 
 Modal.setAppElement("#root")
 
-export const DeleteModal: React.FC<IModalProps> = ({
+export const DeleteModal: React.FC<ModalProps> = ({
   isOpen,
   onClose,
   task,

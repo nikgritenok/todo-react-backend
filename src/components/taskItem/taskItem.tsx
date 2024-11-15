@@ -1,13 +1,9 @@
 import React from "react"
-import { ITask } from "../../features/tasks/taskTypes"
+import { TaskProps } from "../../features/tasks/taskTypes"
 import styles from "./taskItem.module.scss"
 import { useSortable } from "@dnd-kit/sortable"
 import { TaskActions } from "../taskActions/taskActions"
 import { DeleteButton } from "../Buttons/deleteButton/deleteButton"
-
-interface TaskProps {
-  task: ITask
-}
 
 export const Task: React.FC<TaskProps> = ({ task }) => {
   const { attributes, listeners, setNodeRef, transform, transition } =
