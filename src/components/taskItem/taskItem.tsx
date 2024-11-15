@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { TaskProps } from "../../features/tasks/taskTypes"
 import styles from "./taskItem.module.scss"
 import { useSortable } from "@dnd-kit/sortable"
@@ -18,7 +18,7 @@ export const Task: React.FC<TaskProps> = ({ task }) => {
     transition,
   }
 
-  const [isClick, setIsClick] = React.useState(false)
+  const [isClick, setIsClick] = useState(false)
 
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation()

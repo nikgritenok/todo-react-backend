@@ -29,10 +29,16 @@ export const DeleteModal: React.FC<ModalProps> = ({
     >
       <span>Delete this task?</span>
       <div className={styles["delete-buttons"]}>
-        <button className={styles["yes-button"]} onClick={handleDelete}>
+        <button
+          className={`${styles["button"]} ${styles["yes-button"]}`}
+          onClick={handleDelete}
+        >
           Yes
         </button>
-        <button className={styles["no-button"]} onClick={onClose}>
+        <button
+          className={`${styles["button"]} ${styles["no-button"]}`}
+          onClick={onClose}
+        >
           No
         </button>
       </div>

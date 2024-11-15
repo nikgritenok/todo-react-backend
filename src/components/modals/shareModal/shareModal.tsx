@@ -8,6 +8,24 @@ import icon_whatsapp from "../../../assets/icon/icon_whatsapp.svg"
 import icon_facebook from "../../../assets/icon/icon_facebook.svg"
 
 Modal.setAppElement("#root")
+
+const shareButtons = [
+  { src: icon_copy, alt: "Copy" },
+  { src: icon_vk, alt: "VK" },
+  {
+    src: icon_telegram,
+    alt: "Telegram",
+  },
+  {
+    src: icon_whatsapp,
+    alt: "Whatsapp",
+  },
+  {
+    src: icon_facebook,
+    alt: "Facebook",
+  },
+]
+
 export const ShareModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
   return (
     <Modal
@@ -18,21 +36,11 @@ export const ShareModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
       overlayClassName={styles["modal-overlay"]}
     >
       <div className={styles["share-buttons"]}>
-        <button>
-          <img src={icon_copy} alt="Copy" />
-        </button>
-        <button>
-          <img src={icon_vk} alt="VK" />
-        </button>
-        <button>
-          <img src={icon_telegram} alt="Telegram" />
-        </button>
-        <button>
-          <img src={icon_whatsapp} alt="Whatsapp" />
-        </button>
-        <button>
-          <img src={icon_facebook} alt="Facebook" />
-        </button>
+        {shareButtons.map(({ src, alt }, index) => (
+          <button key={index}>
+            <img src={src} alt={alt} />
+          </button>
+        ))}
       </div>
     </Modal>
   )

@@ -10,7 +10,10 @@ export const DeleteButton: React.FC<TaskProps> = ({ task }) => {
     e.stopPropagation()
     setIsModalOpen(true)
   }
-  const closeModal = () => setIsModalOpen(false)
+  const closeModal = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    setIsModalOpen(false)
+  }
 
   return (
     <>

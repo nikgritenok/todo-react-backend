@@ -6,7 +6,6 @@ import { TaskProps } from "../../../features/tasks/taskTypes"
 export const InfoButton: React.FC<TaskProps> = ({ task }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  //const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false)
 
   return (

@@ -1,3 +1,12 @@
+@mixin button-styles {
+  font-family: "Roboto";
+  @include color();
+  color: #d9d9d9;
+  cursor: pointer;
+  border-radius: 4px;
+  min-width: 64px;
+}
+
 .modal-overlay {
   position: fixed;
   display: flex;
@@ -42,28 +51,23 @@
     color: #ffffff;
   }
   .delete-buttons {
+    .button {
+      @include button-styles;
+    }
+
     .yes-button {
-      font-family: "Roboto";
-      @include color();
-      color: #d9d9d9;
-      cursor: pointer;
-      border-radius: 4px;
-      min-width: 64px;
+      @extend .button;
       margin-right: 10px;
 
       &:hover {
         @include focus-color();
       }
     }
+
     .no-button {
-      font-family: "Roboto";
-      @include color();
-      color: #d9d9d9;
-      cursor: pointer;
-      border-radius: 4px;
+      @extend .button;
       border: 1px solid $focus-color;
       background-color: $background-color;
-      min-width: 64px;
     }
   }
 }
