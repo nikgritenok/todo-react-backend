@@ -1,13 +1,13 @@
 .modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   max-width: 600px;
   width: 90vw;
   height: 451px;
   border-radius: 8px;
   background-color: $background-color;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 
   .edit-window {
     max-width: 90%;

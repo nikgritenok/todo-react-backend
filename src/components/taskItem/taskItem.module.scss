@@ -1,24 +1,22 @@
 .task-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 10px;
   border-radius: 8px;
   @include color();
   background-color: #242320;
   box-sizing: border-box;
   margin: 20px 0 0 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   cursor: pointer;
-
   &:hover {
     @include focus-color();
   }
-
   &-text {
-    max-width: 80%;
     display: flex;
     align-items: flex-start;
     flex-direction: column;
+    max-width: 80%;
     color: #f0e3caa3;
     overflow: hidden;
     text-overflow: ellipsis;

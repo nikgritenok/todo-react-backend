@@ -1,19 +1,19 @@
 .task-input-container {
-  max-width: 500px;
-  width: 90vw;
-  height: 70px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  max-width: 500px;
+  width: 90vw;
+  height: 70px;
   margin-top: 20px;
 
   .input-container {
-    flex-grow: 1;
-    width: calc(100% - 10px);
-    height: 70px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    flex-grow: 1;
+    width: calc(100% - 10px);
+    height: 70px;
     margin-right: 20px;
     .title-input {
       width: 100%;
@@ -39,16 +39,16 @@
     }
   }
   .add-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     flex-shrink: 0;
     width: 70px;
     height: 70px;
     font-size: 50px;
     color: $border-color;
     border-radius: 6px;
-    display: flex;
     cursor: pointer;
-    align-items: center;
-    justify-content: center;
     border: 2px solid $focus-color;
     background-color: $background-color;
     color: $focus-color;
