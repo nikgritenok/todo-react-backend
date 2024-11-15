@@ -1,26 +1,14 @@
-import React, { useState } from "react"
+import React from "react"
 import styles from "./deleteButton.module.scss"
-import { TaskProps } from "../../../features/tasks/taskTypes"
-import { DeleteModal } from "../../Modals/DeleteTaskModal/DeleteTaskModal"
 
-export const DeleteButton: React.FC<TaskProps> = ({ task }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false)
+interface DeleteButtonProps {
+  onClick: (e: React.MouseEvent) => void
+}
 
-  const openModal = (e: React.MouseEvent) => {
-    e.stopPropagation()
-    setIsModalOpen(true)
-  }
-  const closeModal = (e: React.MouseEvent) => {
-    e.stopPropagation()
-    setIsModalOpen(false)
-  }
-
+export const DeleteButton: React.FC<DeleteButtonProps> = ({ onClick }) => {
   return (
-    <>
-      <button className={styles["delete-button"]} onClick={openModal}>
-        x
-      </button>
-      <DeleteModal isOpen={isModalOpen} onClose={closeModal} task={task} />
-    </>
+    <button className={styles["delete-button"]} onClick={onClick}>
+      x
+    </button>
   )
 }

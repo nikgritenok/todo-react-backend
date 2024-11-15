@@ -1,21 +1,15 @@
-import React, { useState } from "react"
+import React from "react"
 import icon_edit from "../../../assets/icon/icon_edit.svg"
-import { EditTaskModal } from "../../Modals/EditTaskModal/EditTaskModal"
 import styles from "./EditButton.module.scss"
-import { TaskProps } from "../../../features/tasks/taskTypes"
 
-export const EditButton: React.FC<TaskProps> = ({ task }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false)
+interface EditButtonProps {
+  onClick: () => void
+}
 
-  const openModal = () => setIsModalOpen(true)
-  const closeModal = () => setIsModalOpen(false)
-
+export const EditButton: React.FC<EditButtonProps> = ({ onClick }) => {
   return (
-    <>
-      <button className={styles["edit_button"]} onClick={openModal}>
-        <img src={icon_edit} alt="edit" />
-      </button>
-      <EditTaskModal isOpen={isModalOpen} onClose={closeModal} task={task} />
-    </>
+    <button className={styles["edit_button"]} onClick={onClick}>
+      <img src={icon_edit} alt="edit" />
+    </button>
   )
 }

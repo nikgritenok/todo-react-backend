@@ -4,6 +4,7 @@ import styles from "./taskItem.module.scss"
 import { useSortable } from "@dnd-kit/sortable"
 import { TaskActions } from "../TaskActions/TaskActions"
 import { DeleteButton } from "../Buttons/DeleteButton/DeleteButton"
+import { DeleteModal } from "../Modals/DeleteTaskModal/DeleteTaskModal"
 
 export const Task: React.FC<TaskProps> = ({ task }) => {
   const { attributes, listeners, setNodeRef, transform, transition } =
@@ -25,6 +26,14 @@ export const Task: React.FC<TaskProps> = ({ task }) => {
     setIsClick((prev) => !prev)
   }
 
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
+
+  const openDeleteModal = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    setIsDeleteModalOpen(true)
+  }
+  const closeDeleteModal = () => setIsDeleteModalOpen(false)
+
   return (
     <div
       className="task-item-wrap"
@@ -37,9 +46,16 @@ export const Task: React.FC<TaskProps> = ({ task }) => {
           <h3>{task.title}</h3>
           <p>{task.about}</p>
         </div>
-        <DeleteButton task={task} />
+        <DeleteButton onClick={openDeleteModal} />
       </div>
       <div>{isClick && <TaskActions task={task}></TaskActions>}</div>
+      {isDeleteModalOpen && (
+        <DeleteModal
+          task={task}
+          isOpen={isDeleteModalOpen}
+          onClose={closeDeleteModal}
+        />
+      )}
     </div>
   )
 }

@@ -14,6 +14,6 @@ export interface TasksState {
 
 export interface ModalProps {
   isOpen: boolean
-  onClose: (e: React.MouseEvent) => void
+  onClose: () => void
   task?: Task
 }
