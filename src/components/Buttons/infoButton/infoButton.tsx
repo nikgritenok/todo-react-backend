@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { EditTaskModal } from "../../modals/editTaskModal/editTaskModal"
+import { EditTaskModal } from "../../Modals/EditTaskModal/EditTaskModal"
 import styles from "./infoButton.module.scss"
 import { TaskProps } from "../../../features/tasks/taskTypes"
 

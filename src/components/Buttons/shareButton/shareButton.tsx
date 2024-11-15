@@ -1,7 +1,7 @@
 import { useState } from "react"
 import icon_share from "../../../assets/icon/icon_share.svg"
-import { ShareModal } from "../../modals/shareModal/shareModal"
-import styles from "./shareButton.module.scss"
+import { ShareModal } from "../../Modals/ShareModal/ShareModal"
+import styles from "./ShareButton.module.scss"
 
 export const ShareButton = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)

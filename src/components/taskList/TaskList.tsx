@@ -18,10 +18,10 @@ import {
 import { restrictToWindowEdges } from "@dnd-kit/modifiers"
 
 import { RootState } from "../../store"
-import { Task } from "../taskItem/taskItem"
+import { Task } from "../TaskItem/TaskItem"
 import { setTasks } from "../../features/tasks/taskSlice"
 import styles from "./taskList.module.scss"
-import { NoTaskMessage } from "../noTaskMessage/noTaskMessage"
+import { NoTaskMessage } from "../NoTaskMessage/NoTaskMessage"
 
 export const TaskList: React.FC = () => {
   const dispatch = useDispatch()

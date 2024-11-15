@@ -1,4 +1,4 @@
-import styles from "./shareModal.module.scss"
+import styles from "./ShareModal.module.scss"
 import Modal from "react-modal"
 import { ModalProps } from "../../../features/tasks/taskTypes"
 import icon_copy from "../../../assets/icon/icon_copy.svg"

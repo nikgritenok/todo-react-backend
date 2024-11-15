@@ -1,5 +1,5 @@
-import { TaskInput } from "./components/taskinput/taskInput"
-import { TaskList } from "./components/taskList/TaskList"
+import { TaskInput } from "./components/TaskInput/TaskInput"
+import { TaskList } from "./components/TaskList/TaskList"
 
 function App() {
   return (
