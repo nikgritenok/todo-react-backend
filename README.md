@@ -1,63 +1,52 @@
-# To-Do List Application
+# Приложение To-Do List
 
 ![Coverimage](src/assets/icon/image.png)
 
-This is a modern To-Do List application built using React, TypeScript, Redux, and Yarn. The application allows users to add, edit, delete tasks, and manage their to-do list interactively with the added feature of drag-and-drop task reordering.
+Это приложение для управления списком дел, созданное с использованием React, TypeScript, Redux и Yarn. Оно позволяет пользователям добавлять, редактировать, удалять задачи и управлять своим списком интерактивно, а также предоставляет возможность перетаскивания задач для изменения их порядка.
 
-## Features
+## Возможности
 
-- **Add Tasks**: Users can add new tasks with a title and description.
-- **Edit Tasks**: Users can modify the title or description of existing tasks.
-- **Delete Tasks**: Users can remove tasks from the list.
-- **Task Focus**: Visual indication when a task or input field is focused for a more user-friendly experience.
-- **Modular SCSS**: Styles are structured using SCSS with variables, mixins, and a clean structure for easier maintenance.
-- **Interactive UI**: Responsive design with buttons and form inputs that respond to user actions.
-- **Drag-and-Drop Reordering**: Tasks can be reordered by dragging and dropping them.
-- **Responsive Design**: The application is designed to work seamlessly on various screen sizes.
+- **Добавление задач**: Пользователи могут добавлять новые задачи с заголовком и описанием.
+- **Редактирование задач**: Пользователи могут изменять заголовок или описание существующих задач.
+- **Удаление задач**: Пользователи могут удалять задачи из списка.
+- **Модульный SCSS**: Стили организованы с использованием SCSS, с переменными и миксинами для удобства поддержки.
+- **Интерактивный UI**: Отзывчивый дизайн с кнопками и формами, реагирующими на действия пользователя.
+- **Перетаскивание задач**: Возможность изменять порядок задач с помощью drag-and-drop.
+- **Адаптивный дизайн**: Приложение работает без сбоев на различных размерах экрана.
 
 ## Technologies Used
 
-- **HTML**: Structure of the application.
-- **SCSS**: Styling of the application with the use of variables and mixins.
-- **TypeScript**: Typed JavaScript for enhanced code quality and maintainability.
-- **React**: JavaScript library for building user interfaces.
-- **Redux**: State management library for managing application state.
-- **Yarn**: Package manager for managing project dependencies.
-- **dnd-kit**: A library for creating drag-and-drop interfaces.
-- **react-modal**: A library for creating modal windows.
-- **Vite**: A fast build tool for modern web projects, used to serve and bundle the application.
-- **ESLint**: A tool for identifying and fixing problems in JavaScript code, ensuring code quality and consistency.
-- **Prettier**: A code formatter that enforces a consistent style across the project.
+- **HTML**
+- **SCSS**
+- **TypeScript**
+- **React**
+- **Redux**
+- **Yarn**
+- **dnd-kit**
+- **react-modal**
+- **Vite**
+- **ESLint**
+- **Prettier**
 
-## How to Run
+## Как запустить проект локально
 
-1. Clone the repository:
+1. Склонируйте репозиторий:
 
    ```bash
    git clone https://github.com/yourusername/todo-app.git
    cd todo-app
    ```
 
-2. Install dependencies:
+2. Установите зависимости:
 
    ```bash
    yarn install
    ```
 
-3. Start the development server using Vite:
+3. Запустите приложение:
 
    ```bash
    yarn dev
    ```
 
-4. Open your browser and navigate to http://localhost:5173 to view the application.
-
-## Folder Structure
-
-```bash
-src/
-│
-├── components/          # Reusable components (e.g., Task, Modal, etc.)
-├── styles/              # SCSS styles
-└── App.tsx              # Main App component
-```
+4. Откройте приложение в браузере по адресу [http://localhost:5173](http://localhost:5173).
