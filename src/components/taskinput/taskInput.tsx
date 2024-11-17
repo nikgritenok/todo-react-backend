@@ -45,10 +45,9 @@ export const TaskInput = () => {
       // Логика определения индекса
       const lastIndex = tasks.length > 0 ? tasks[tasks.length - 1].index : 0
       const newIndex = lastIndex + 1
-      console.log("Новый индекс:", newIndex)
 
       const newTask = {
-        id: Date.now(),
+        id: String(Date.now()),
         title,
         about,
         index: newIndex, // Индекс новой задачи

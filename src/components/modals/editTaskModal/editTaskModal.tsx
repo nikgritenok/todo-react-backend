@@ -4,6 +4,7 @@ import Modal from "react-modal"
 import { useState, useEffect, useRef } from "react"
 import { useDispatch } from "react-redux"
 import { updateTask } from "../../../features/tasks/taskSlice"
+import { AppDispatch } from "../../../store"
 
 Modal.setAppElement("#root")
 
@@ -12,7 +13,7 @@ export const EditTaskModal: React.FC<ModalProps> = ({
   onClose,
   task,
 }) => {
-  const dispatch = useDispatch()
+  const dispatch: AppDispatch = useDispatch()
 
   const [title, setTitle] = useState(task?.title || "")
   const [about, setAbout] = useState(task?.about || "")
@@ -35,10 +36,8 @@ export const EditTaskModal: React.FC<ModalProps> = ({
 
     if (task) {
       const updatedTask = { ...task, title, about }
-
-      dispatch(updateTask(updatedTask))
-
-      onClose()
+      dispatch(updateTask(updatedTask)) // Обновляем задачу через Redux
+      onClose() // Закрываем модальное окно после обновления
     }
   }
 

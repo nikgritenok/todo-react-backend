@@ -86,16 +86,18 @@ app.put("/api/tasks/:id", async (req, res) => {
     const { title, about } = req.body
     const { id } = req.params
 
-    const updatedTask = await TaskModel.findByIdAndUpdate(
-      id,
+    // Используйте findByIdAndUpdate для обновления данных
+    const updatedTask = await TaskModel.findOneAndUpdate(
+      { id: id }, // Указываем идентификатор задачи
       { title, about },
-      { new: true },
+      { new: true }, // это возвращает обновленный документ
     )
 
     if (!updatedTask) {
       return res.status(404).json({ message: "Task not found" })
     }
 
+    // Успешное обновление
     res.status(200).json(updatedTask)
   } catch (error) {
     console.error(error)
@@ -116,7 +118,54 @@ app.get("/api/tasks", async (req, res) => {
 
 // Эндпоинт для изменения порядка задач
 app.put("/api/tasks/reorder", async (req, res) => {
-  console.log("Received tasks:", req.body) // Логируем данные
+  try {
+    const { tasks } = req.body
+
+    // Проверка, что данные в запросе корректны
+    if (!tasks || !Array.isArray(tasks)) {
+      return res
+        .status(400)
+        .json({ message: "Invalid request: 'tasks' should be an array" })
+    }
+
+    // Массив обновленных задач
+    const updatedTasks = []
+
+    // Проходим по каждому объекту в массиве tasks
+    for (const task of tasks) {
+      if (!task.id || task.index === undefined) {
+        return res
+          .status(400)
+          .json({ message: "Each task must have an 'id' and 'index'" })
+      }
+
+      console.log(`Ищем задачу с id: ${task.id}`) // Логируем запрос на поиск
+
+      // Находим задачу в базе данных
+      const existingTask = await TaskModel.findOne({ id: task.id })
+
+      if (!existingTask) {
+        // Если задача не найдена, выводим 404
+        console.log(`Задача с id ${task.id} не найдена`) // Логируем отсутствие задачи
+        return res
+          .status(404)
+          .json({ message: `Task with id ${task.id} not found` })
+      }
+
+      // Если индекс задачи изменился
+      if (existingTask.index !== task.index) {
+        existingTask.index = task.index
+        const updatedTask = await existingTask.save() // Сохраняем изменения
+        updatedTasks.push(updatedTask) // Добавляем обновленную задачу в массив
+      }
+    }
+
+    // Возвращаем обновленные задачи
+    res.status(200).json(updatedTasks)
+  } catch (error) {
+    console.error("Ошибка при обновлении порядка задач:", error)
+    res.status(500).json({ message: "Internal Server Error" })
+  }
 })
 
 // Запуск сервера

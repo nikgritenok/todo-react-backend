@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import {
   closestCorners,
@@ -16,15 +16,9 @@ import {
   arrayMove,
 } from "@dnd-kit/sortable"
 import { restrictToWindowEdges } from "@dnd-kit/modifiers"
-import axios from "axios"
-
 import { AppDispatch, RootState } from "../../store"
 import { Task } from "../TaskItem/TaskItem"
-import {
-  fetchTasks,
-  reorderTasks,
-  reorderTasksThunk,
-} from "../../features/tasks/taskSlice"
+import { fetchTasks, reorderTasksThunk } from "../../features/tasks/taskSlice"
 import styles from "./taskList.module.scss"
 import { NoTaskMessage } from "../NoTaskMessage/NoTaskMessage"
 
@@ -42,18 +36,12 @@ export const TaskList = () => {
     const { active, over } = event
 
     if (over && active.id !== over.id) {
-      const oldIndex = tasks.findIndex(
-        (task) => String(task.id) === String(active.id),
-      )
-      const newIndex = tasks.findIndex(
-        (task) => String(task.id) === String(over.id),
-      )
+      const oldIndex = tasks.findIndex((task) => task.id === active.id)
+      const newIndex = tasks.findIndex((task) => task.id === over.id)
 
       const reorderedTasks = arrayMove(tasks, oldIndex, newIndex).map(
         (task, index) => ({ ...task, index }),
-      ) // Обновляем index
-
-      console.log("Новый порядок задач:", reorderedTasks)
+      )
 
       // Обновляем порядок задач в store и синхронизируем с сервером
       dispatch(reorderTasksThunk(reorderedTasks))

@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit"
 import axios from "axios"
-import { Task } from "./taskTypes"
+import { Task } from "../../features/tasks/taskTypes"
 
 const API_URL = "http://localhost:3000/api/tasks"
 
@@ -17,7 +17,7 @@ export const addTask = createAsyncThunk("tasks/addTask", async (task: Task) => {
 
 export const deleteTask = createAsyncThunk(
   "tasks/deleteTask",
-  async (id: number) => {
+  async (id: string) => {
     await axios.delete(`${API_URL}/${id}`)
     return id
   },
@@ -35,6 +35,7 @@ export const reorderTasksThunk = createAsyncThunk(
   "tasks/reorderTasks",
   async (tasks: Task[], { dispatch }) => {
     try {
+      console.log("tasks", tasks)
       // Отправляем обновленный порядок задач на сервер
       await axios.put(`${API_URL}/reorder`, tasks)
 
@@ -51,7 +52,11 @@ export const reorderTasksThunk = createAsyncThunk(
 )
 
 // Начальное состояние
-const initialState: { tasks: Task[]; status: string; error: string | null } = {
+export const initialState: {
+  tasks: Task[]
+  status: string
+  error: string | null
+} = {
   tasks: [],
   status: "idle",
   error: null,
@@ -81,7 +86,7 @@ const taskSlice = createSlice({
       .addCase(addTask.fulfilled, (state, action: PayloadAction<Task>) => {
         state.tasks.push(action.payload)
       })
-      .addCase(deleteTask.fulfilled, (state, action: PayloadAction<number>) => {
+      .addCase(deleteTask.fulfilled, (state, action: PayloadAction<string>) => {
         state.tasks = state.tasks.filter((task) => task.id !== action.payload)
       })
       .addCase(updateTask.fulfilled, (state, action: PayloadAction<Task>) => {
