@@ -34,6 +34,7 @@ export const ShareModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
       className={styles.modalContent}
       closeTimeoutMS={200}
       overlayClassName={styles["modal-overlay"]}
+      ariaHideApp={false}
     >
       <div className={styles["share-buttons"]}>
         {shareButtons.map(({ src, alt }, index) => (

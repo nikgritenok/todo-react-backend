@@ -3,6 +3,7 @@ import styles from "./deleteTaskModal.module.scss"
 import Modal from "react-modal"
 import { useDispatch } from "react-redux"
 import { deleteTask } from "../../../features/tasks/taskSlice"
+import { AppDispatch } from "../../../store"
 
 Modal.setAppElement("#root")
 
@@ -11,11 +12,14 @@ export const DeleteModal: React.FC<ModalProps> = ({
   onClose,
   task,
 }) => {
-  const dispatch = useDispatch()
+  const dispatch: AppDispatch = useDispatch()
 
   const handleDelete = () => {
-    if (task) {
-      dispatch(deleteTask(task?.id))
+    if (task && task.id) {
+      console.log("Удаление задачи с id:", task.id)
+      // Используем _id вместо id
+      dispatch(deleteTask(task.id)) // Передаем строковый _id
+      onClose() // Закрытие модала после удаления
     }
   }
 
@@ -26,6 +30,7 @@ export const DeleteModal: React.FC<ModalProps> = ({
       className={styles["modal-content"]}
       closeTimeoutMS={200}
       overlayClassName={styles["modal-overlay"]}
+      ariaHideApp={false}
     >
       <span>Delete this task?</span>
       <div className={styles["delete-buttons"]}>

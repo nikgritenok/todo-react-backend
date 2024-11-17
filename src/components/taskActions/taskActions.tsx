@@ -4,8 +4,8 @@ import { ShareButton } from "../Buttons/ShareButton/ShareButton"
 import { EditButton } from "../Buttons/EditButton/EditButton"
 import { InfoButton } from "../Buttons/InfoButton/InfoButton"
 import { TaskProps } from "../../features/tasks/taskTypes"
-import { EditTaskModal } from "../Modals/EditTaskModal/EditTaskModal"
-import { ShareModal } from "../Modals/ShareModal/ShareModal"
+import { EditTaskModal } from "../modals/EditTaskModal/EditTaskModal"
+import { ShareModal } from "../modals/ShareModal/ShareModal"
 
 export const TaskActions: React.FC<TaskProps> = ({ task }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)

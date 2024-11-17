@@ -4,7 +4,7 @@ import styles from "./taskItem.module.scss"
 import { useSortable } from "@dnd-kit/sortable"
 import { TaskActions } from "../TaskActions/TaskActions"
 import { DeleteButton } from "../Buttons/DeleteButton/DeleteButton"
-import { DeleteModal } from "../Modals/DeleteTaskModal/DeleteTaskModal"
+import { DeleteModal } from "../modals/DeleteTaskModal/DeleteTaskModal"
 
 export const Task: React.FC<TaskProps> = ({ task }) => {
   const { attributes, listeners, setNodeRef, transform, transition } =

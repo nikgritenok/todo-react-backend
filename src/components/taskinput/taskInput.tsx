@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react"
 import { useDispatch } from "react-redux"
 import styles from "./TaskInput.module.scss"
 import { addTask } from "../../features/tasks/taskSlice"
-import { Task } from "../../features/tasks/taskTypes"
+import { AppDispatch } from "../../store"
 
 export const TaskInput = () => {
   const [title, setTitle] = useState<string>("")
@@ -10,7 +10,7 @@ export const TaskInput = () => {
   const titleRef = useRef<HTMLInputElement>(null)
   const aboutRef = useRef<HTMLInputElement>(null)
 
-  const dispatch = useDispatch()
+  const dispatch: AppDispatch = useDispatch()
 
   const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value)
@@ -39,16 +39,25 @@ export const TaskInput = () => {
 
   const handleAddClick = () => {
     if (title.trim() && about.trim()) {
-      const newTask: Task = {
+      const newTask = {
         id: Date.now(),
         title,
         about,
       }
-      dispatch(addTask(newTask))
 
-      setTitle("")
-      setAbout("")
-      titleRef.current?.focus()
+      // Отправка задачи через Redux
+      dispatch(addTask(newTask))
+        .unwrap() // Используется для обработки результата
+        .then(() => {
+          // Очистка полей после успешного добавления
+          setTitle("")
+          setAbout("")
+          titleRef.current?.focus()
+        })
+        .catch((error) => {
+          alert("Не удалось добавить задачу. Попробуйте позже.")
+          console.error(error)
+        })
     } else {
       alert("Пожалуйста, заполните все поля")
     }

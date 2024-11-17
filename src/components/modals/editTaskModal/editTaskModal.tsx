@@ -66,6 +66,7 @@ export const EditTaskModal: React.FC<ModalProps> = ({
       className={styles["modal-content"]}
       closeTimeoutMS={200}
       overlayClassName={styles["modal-overlay"]}
+      ariaHideApp={false}
     >
       <div className={styles["edit-window"]}>
         <input
