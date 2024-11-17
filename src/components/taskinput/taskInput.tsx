@@ -12,7 +12,6 @@ export const TaskInput = () => {
 
   const dispatch: AppDispatch = useDispatch()
 
-  // Получение списка задач из хранилища
   const tasks = useSelector((state: RootState) => state.tasks.tasks)
 
   const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,7 +41,6 @@ export const TaskInput = () => {
 
   const handleAddClick = () => {
     if (title.trim() && about.trim()) {
-      // Логика определения индекса
       const lastIndex = tasks.length > 0 ? tasks[tasks.length - 1].index : 0
       const newIndex = lastIndex + 1
 
@@ -50,14 +48,12 @@ export const TaskInput = () => {
         id: String(Date.now()),
         title,
         about,
-        index: newIndex, // Индекс новой задачи
+        index: newIndex,
       }
 
-      // Отправка задачи через Redux
       dispatch(addTask(newTask))
-        .unwrap() // Используется для обработки результата
+        .unwrap()
         .then(() => {
-          // Очистка полей после успешного добавления
           setTitle("")
           setAbout("")
           titleRef.current?.focus()

@@ -43,7 +43,6 @@ export const TaskList = () => {
         (task, index) => ({ ...task, index }),
       )
 
-      // Обновляем порядок задач в store и синхронизируем с сервером
       dispatch(reorderTasksThunk(reorderedTasks))
     }
   }
@@ -76,7 +75,7 @@ export const TaskList = () => {
           <NoTaskMessage />
         ) : (
           <SortableContext
-            items={sortedTasks.map((task) => task.id)} // Передаем id
+            items={sortedTasks.map((task) => task.id)}
             strategy={verticalListSortingStrategy}
           >
             {sortedTasks.map((task) => (

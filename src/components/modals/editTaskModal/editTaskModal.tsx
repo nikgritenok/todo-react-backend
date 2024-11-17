@@ -36,8 +36,8 @@ export const EditTaskModal: React.FC<ModalProps> = ({
 
     if (task) {
       const updatedTask = { ...task, title, about }
-      dispatch(updateTask(updatedTask)) // Обновляем задачу через Redux
-      onClose() // Закрываем модальное окно после обновления
+      dispatch(updateTask(updatedTask))
+      onClose()
     }
   }
 

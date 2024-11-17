@@ -4,7 +4,6 @@ import { Task } from "../../features/tasks/taskTypes"
 
 const API_URL = "http://localhost:3000/api/tasks"
 
-// Асинхронные операции
 export const fetchTasks = createAsyncThunk("tasks/fetchTasks", async () => {
   const response = await axios.get(`${API_URL}`)
   return response.data
@@ -36,22 +35,17 @@ export const reorderTasksThunk = createAsyncThunk(
   async (tasks: Task[], { dispatch }) => {
     try {
       console.log("tasks", tasks)
-      // Отправляем обновленный порядок задач на сервер
       await axios.put(`${API_URL}/reorder`, tasks)
 
-      // После обновления получаем все задачи, чтобы вывести их
-      const response = await axios.get(`${API_URL}/tasks`) // Это может быть эндпоинт для получения всех задач
+      const response = await axios.get(`${API_URL}/tasks`)
 
-      // Диспатчим все задачи в store
       dispatch(reorderTasks(response.data))
     } catch (error) {
       console.error("Ошибка синхронизации порядка задач с сервером:", error)
-      // В случае ошибки можно восстановить предыдущий порядок или вывести уведомление.
     }
   },
 )
 
-// Начальное состояние
 export const initialState: {
   tasks: Task[]
   status: string
@@ -77,7 +71,7 @@ const taskSlice = createSlice({
       })
       .addCase(fetchTasks.fulfilled, (state, action: PayloadAction<Task[]>) => {
         state.status = "succeeded"
-        state.tasks = action.payload.sort((a, b) => a.index - b.index) // Сортируем задачи по индексу
+        state.tasks = action.payload.sort((a, b) => a.index - b.index)
       })
       .addCase(fetchTasks.rejected, (state, action) => {
         state.status = "failed"

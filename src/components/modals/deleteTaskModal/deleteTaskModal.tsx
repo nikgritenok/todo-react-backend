@@ -16,9 +16,8 @@ export const DeleteModal: React.FC<ModalProps> = ({
 
   const handleDelete = () => {
     if (task && task.id) {
-      // Используем _id вместо id
-      dispatch(deleteTask(task.id)) // Передаем строковый _id
-      onClose() // Закрытие модала после удаления
+      dispatch(deleteTask(task.id))
+      onClose()
     }
   }
 
