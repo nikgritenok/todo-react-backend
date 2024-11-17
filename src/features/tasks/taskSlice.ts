@@ -35,9 +35,9 @@ export const reorderTasksThunk = createAsyncThunk(
   async (tasks: Task[], { dispatch }) => {
     try {
       console.log("tasks", tasks)
-      await axios.put(`${API_URL}/reorder`, tasks)
+      await axios.put(`http://localhost:3000/tasks/reorder`, tasks)
 
-      const response = await axios.get(`${API_URL}/tasks`)
+      const response = await axios.get(`${API_URL}`)
 
       dispatch(reorderTasks(response.data))
     } catch (error) {

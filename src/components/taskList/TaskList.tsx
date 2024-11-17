@@ -42,7 +42,7 @@ export const TaskList = () => {
       const reorderedTasks = arrayMove(tasks, oldIndex, newIndex).map(
         (task, index) => ({ ...task, index }),
       )
-
+      console.log("reorderedTasks", reorderedTasks)
       dispatch(reorderTasksThunk(reorderedTasks))
     }
   }

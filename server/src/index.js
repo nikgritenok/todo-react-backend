@@ -11,7 +11,13 @@ const PORT = process.env.PORT || 3000
 const mongoURI = process.env.MONGO_URI
 
 app.use(cors())
-app.use(json())
+app.use(express.json())
+
+app.use((req, res, next) => {
+  console.log(`Headers:`, req.headers)
+  console.log(`Body:`, req.body)
+  next()
+})
 
 connect(mongoURI, {})
   .then(() => {
@@ -97,47 +103,22 @@ app.get("/api/tasks", async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" })
   }
 })
-app.put("/api/tasks/reorder", async (req, res) => {
+app.put("/tasks/reorder", async (req, res) => {
   try {
-    const { tasks } = req.body
+    const updatedTasks = req.body
 
-    if (!tasks || !Array.isArray(tasks)) {
-      return res
-        .status(400)
-        .json({ message: "Invalid request: 'tasks' should be an array" })
-    }
+    const bulkOperations = updatedTasks.map((task) => ({
+      updateOne: {
+        filter: { id: task.id },
+        update: { $set: { index: task.index } },
+      },
+    }))
 
-    const updatedTasks = []
-
-    for (const task of tasks) {
-      if (!task.id || task.index === undefined) {
-        return res
-          .status(400)
-          .json({ message: "Each task must have an 'id' and 'index'" })
-      }
-
-      console.log(`Ищем задачу с id: ${task.id}`)
-
-      const existingTask = await TaskModel.findOne({ id: task.id })
-
-      if (!existingTask) {
-        console.log(`Задача с id ${task.id} не найдена`)
-        return res
-          .status(404)
-          .json({ message: `Task with id ${task.id} not found` })
-      }
-
-      if (existingTask.index !== task.index) {
-        existingTask.index = task.index
-        const updatedTask = await existingTask.save()
-        updatedTasks.push(updatedTask)
-      }
-    }
-
-    res.status(200).json(updatedTasks)
+    await TaskModel.bulkWrite(bulkOperations)
+    res.status(200).send({ message: "Order updated successfully" })
   } catch (error) {
-    console.error("Ошибка при обновлении порядка задач:", error)
-    res.status(500).json({ message: "Internal Server Error" })
+    console.error(error)
+    res.status(500).send({ error: "Failed to update order" })
   }
 })
 
