@@ -1,8 +1,8 @@
 import React, { useState, useRef } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import styles from "./TaskInput.module.scss"
 import { addTask } from "../../features/tasks/taskSlice"
-import { AppDispatch } from "../../store"
+import { AppDispatch, RootState } from "../../store"
 
 export const TaskInput = () => {
   const [title, setTitle] = useState<string>("")
@@ -11,6 +11,9 @@ export const TaskInput = () => {
   const aboutRef = useRef<HTMLInputElement>(null)
 
   const dispatch: AppDispatch = useDispatch()
+
+  // Получение списка задач из хранилища
+  const tasks = useSelector((state: RootState) => state.tasks.tasks)
 
   const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value)
@@ -39,10 +42,16 @@ export const TaskInput = () => {
 
   const handleAddClick = () => {
     if (title.trim() && about.trim()) {
+      // Логика определения индекса
+      const lastIndex = tasks.length > 0 ? tasks[tasks.length - 1].index : 0
+      const newIndex = lastIndex + 1
+      console.log("Новый индекс:", newIndex)
+
       const newTask = {
         id: Date.now(),
         title,
         about,
+        index: newIndex, // Индекс новой задачи
       }
 
       // Отправка задачи через Redux

@@ -42,16 +42,17 @@ app.get("/api/tasks", async (req, res) => {
 // Эндпоинт для добавления задачи
 app.post("/api/tasks", async (req, res) => {
   try {
-    const { title, about } = req.body
+    const { title, about, id, index } = req.body
 
     if (!title || !about) {
       return res.status(400).json({ message: "Title and About are required" })
     }
 
     const newTask = new TaskModel({
-      id: Date.now(),
+      id,
       title,
       about,
+      index,
     })
 
     await newTask.save()
@@ -100,6 +101,22 @@ app.put("/api/tasks/:id", async (req, res) => {
     console.error(error)
     res.status(500).json({ message: "Internal Server Error" })
   }
+})
+
+// Эндпоинт для получения всех задач
+app.get("/api/tasks", async (req, res) => {
+  try {
+    const tasks = await TaskModel.find().sort({ index: 1 }) // Можно отсортировать по индексу, если это важно
+    res.status(200).json(tasks) // Возвращаем все задачи
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ message: "Internal Server Error" })
+  }
+})
+
+// Эндпоинт для изменения порядка задач
+app.put("/api/tasks/reorder", async (req, res) => {
+  console.log("Received tasks:", req.body) // Логируем данные
 })
 
 // Запуск сервера

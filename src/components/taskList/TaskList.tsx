@@ -20,7 +20,11 @@ import axios from "axios"
 
 import { AppDispatch, RootState } from "../../store"
 import { Task } from "../TaskItem/TaskItem"
-import { fetchTasks, reorderTasks } from "../../features/tasks/taskSlice"
+import {
+  fetchTasks,
+  reorderTasks,
+  reorderTasksThunk,
+} from "../../features/tasks/taskSlice"
 import styles from "./taskList.module.scss"
 import { NoTaskMessage } from "../NoTaskMessage/NoTaskMessage"
 
@@ -30,7 +34,6 @@ export const TaskList = () => {
     (state: RootState) => state.tasks,
   )
 
-  // Загружаем задачи из БД при монтировании компонента
   useEffect(() => {
     dispatch(fetchTasks())
   }, [dispatch])
@@ -46,34 +49,21 @@ export const TaskList = () => {
         (task) => String(task.id) === String(over.id),
       )
 
-      const newTasks = arrayMove(tasks, oldIndex, newIndex)
-      dispatch(reorderTasks(newTasks))
+      const reorderedTasks = arrayMove(tasks, oldIndex, newIndex).map(
+        (task, index) => ({ ...task, index }),
+      ) // Обновляем index
 
-      try {
-        // Отправляем обновленный порядок задач на сервер
-        await axios.post("http://localhost:3000/api/tasks/reorder", newTasks)
-      } catch (error) {
-        console.error("Ошибка синхронизации порядка задач с сервером:", error)
-      }
+      console.log("Новый порядок задач:", reorderedTasks)
+
+      // Обновляем порядок задач в store и синхронизируем с сервером
+      dispatch(reorderTasksThunk(reorderedTasks))
     }
   }
 
   const sensors = useSensors(
-    useSensor(PointerSensor, {
-      activationConstraint: {
-        distance: 5,
-      },
-    }),
-    useSensor(MouseSensor, {
-      activationConstraint: {
-        distance: 5,
-      },
-    }),
-    useSensor(TouchSensor, {
-      activationConstraint: {
-        distance: 5,
-      },
-    }),
+    useSensor(PointerSensor, { activationConstraint: { distance: 5 } }),
+    useSensor(MouseSensor, { activationConstraint: { distance: 5 } }),
+    useSensor(TouchSensor, { activationConstraint: { distance: 5 } }),
   )
 
   if (status === "loading") {
@@ -83,6 +73,8 @@ export const TaskList = () => {
   if (status === "failed") {
     return <div>Ошибка загрузки задач: {error}</div>
   }
+
+  const sortedTasks = [...tasks].sort((a, b) => a.index - b.index)
 
   return (
     <DndContext
@@ -96,11 +88,11 @@ export const TaskList = () => {
           <NoTaskMessage />
         ) : (
           <SortableContext
-            items={tasks.map((task) => String(task.id))}
+            items={sortedTasks.map((task) => task.id)} // Передаем id
             strategy={verticalListSortingStrategy}
           >
-            {tasks.map((task) => (
-              <Task key={task.id} task={task} />
+            {sortedTasks.map((task) => (
+              <Task task={task} key={task.id} />
             ))}
           </SortableContext>
         )}

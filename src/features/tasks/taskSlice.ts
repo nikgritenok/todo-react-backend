@@ -2,7 +2,6 @@ import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit"
 import axios from "axios"
 import { Task } from "./taskTypes"
 
-// API URL
 const API_URL = "http://localhost:3000/api/tasks"
 
 // Асинхронные операции
@@ -19,7 +18,6 @@ export const addTask = createAsyncThunk("tasks/addTask", async (task: Task) => {
 export const deleteTask = createAsyncThunk(
   "tasks/deleteTask",
   async (id: number) => {
-    console.log(`${API_URL}/${id}`)
     await axios.delete(`${API_URL}/${id}`)
     return id
   },
@@ -33,10 +31,29 @@ export const updateTask = createAsyncThunk(
   },
 )
 
+export const reorderTasksThunk = createAsyncThunk(
+  "tasks/reorderTasks",
+  async (tasks: Task[], { dispatch }) => {
+    try {
+      // Отправляем обновленный порядок задач на сервер
+      await axios.put(`${API_URL}/reorder`, tasks)
+
+      // После обновления получаем все задачи, чтобы вывести их
+      const response = await axios.get(`${API_URL}/tasks`) // Это может быть эндпоинт для получения всех задач
+
+      // Диспатчим все задачи в store
+      dispatch(reorderTasks(response.data))
+    } catch (error) {
+      console.error("Ошибка синхронизации порядка задач с сервером:", error)
+      // В случае ошибки можно восстановить предыдущий порядок или вывести уведомление.
+    }
+  },
+)
+
 // Начальное состояние
 const initialState: { tasks: Task[]; status: string; error: string | null } = {
   tasks: [],
-  status: "idle", // idle | loading | succeeded | failed
+  status: "idle",
   error: null,
 }
 
@@ -50,27 +67,23 @@ const taskSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      // Загрузка задач
       .addCase(fetchTasks.pending, (state) => {
         state.status = "loading"
       })
       .addCase(fetchTasks.fulfilled, (state, action: PayloadAction<Task[]>) => {
         state.status = "succeeded"
-        state.tasks = action.payload
+        state.tasks = action.payload.sort((a, b) => a.index - b.index) // Сортируем задачи по индексу
       })
       .addCase(fetchTasks.rejected, (state, action) => {
         state.status = "failed"
-        state.error = action.error.message || "Failed to fetch tasks"
+        state.error = action.error.message || "Ошибка загрузки задач"
       })
-      // Добавление задачи
       .addCase(addTask.fulfilled, (state, action: PayloadAction<Task>) => {
         state.tasks.push(action.payload)
       })
-      // Удаление задачи
       .addCase(deleteTask.fulfilled, (state, action: PayloadAction<number>) => {
         state.tasks = state.tasks.filter((task) => task.id !== action.payload)
       })
-      // Обновление задачи
       .addCase(updateTask.fulfilled, (state, action: PayloadAction<Task>) => {
         const index = state.tasks.findIndex(
           (task) => task.id === action.payload.id,

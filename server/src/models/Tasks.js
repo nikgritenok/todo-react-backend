@@ -7,6 +7,7 @@ const taskSchema = new mongoose.Schema({
   id: { type: Number, required: true },
   title: { type: String, required: true },
   about: { type: String, required: true },
+  index: { type: Number, required: true }, // Поле для хранения порядка задач
 })
 
 // Создание модели для коллекции tasks
