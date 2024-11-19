@@ -114,8 +114,8 @@ app.put("/tasks/reorder", async (req, res) => {
       },
     }))
 
-    await TaskModel.bulkWrite(bulkOperations)
-    res.status(200).send({ message: "Order updated successfully" })
+    const result = await TaskModel.bulkWrite(bulkOperations)
+    res.status(200).send({ message: "Order updated successfully", result })
   } catch (error) {
     console.error(error)
     res.status(500).send({ error: "Failed to update order" })

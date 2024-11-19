@@ -39,11 +39,11 @@ export const TaskList = () => {
       const oldIndex = tasks.findIndex((task) => task.id === active.id)
       const newIndex = tasks.findIndex((task) => task.id === over.id)
 
-      const reorderedTasks = arrayMove(tasks, oldIndex, newIndex).map(
-        (task, index) => ({ ...task, index }),
-      )
-      console.log("reorderedTasks", reorderedTasks)
-      dispatch(reorderTasksThunk(reorderedTasks))
+      if (oldIndex !== -1 && newIndex !== -1) {
+        const reorderedTasks = arrayMove(tasks, oldIndex, newIndex)
+
+        dispatch(reorderTasksThunk(reorderedTasks))
+      }
     }
   }
 
