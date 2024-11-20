@@ -6,6 +6,7 @@ import { InfoButton } from "../Buttons/InfoButton/InfoButton"
 import { TaskProps } from "../../features/tasks/taskTypes"
 import { EditTaskModal } from "../modals/EditTaskModal/EditTaskModal"
 import { ShareModal } from "../modals/ShareModal/ShareModal"
+import { PinButton } from "../Buttons/PinButton/PinButton"
 
 export const TaskActions: React.FC<TaskProps> = ({ task }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
@@ -20,6 +21,7 @@ export const TaskActions: React.FC<TaskProps> = ({ task }) => {
   return (
     <div className={styles["task-actions"]}>
       <div className={styles["block-buttons"]}>
+        <PinButton task={task} />
         <ShareButton onClick={openShareModal} />
         <InfoButton task={task} />
         <EditButton onClick={openEditModal} />

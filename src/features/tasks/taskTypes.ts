@@ -3,6 +3,7 @@ export interface Task {
   title: string
   about: string
   index: number
+  pinned: boolean
 }
 
 export interface TaskProps {

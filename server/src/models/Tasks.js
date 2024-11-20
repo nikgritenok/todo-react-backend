@@ -4,6 +4,7 @@ const taskSchema = new mongoose.Schema({
   title: { type: String, required: true },
   about: { type: String, required: true },
   index: { type: Number, required: true },
+  pinned: { type: Boolean, required: true },
 })
 
 export const TaskModel = mongoose.model("Task", taskSchema)
