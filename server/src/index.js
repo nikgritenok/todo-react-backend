@@ -49,6 +49,7 @@ app.post("/api/tasks", async (req, res) => {
       title,
       about,
       index,
+      pinned: false,
     })
 
     await newTask.save()

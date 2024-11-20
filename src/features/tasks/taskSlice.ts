@@ -41,6 +41,23 @@ export const reorderTasksThunk = createAsyncThunk(
   },
 )
 
+// Новый асинхронный экшен для синхронизации закрепленной задачи с сервером
+export const togglePinnedTaskOnServer = createAsyncThunk(
+  "tasks/togglePinnedTaskOnServer",
+  async (task: Task) => {
+    try {
+      const response = await axios.put(`${API_URL}/${task.id}`, task)
+      return response.data
+    } catch (error) {
+      console.error(
+        "Ошибка при обновлении закрепленной задачи на сервере:",
+        error,
+      )
+      throw error
+    }
+  },
+)
+
 export const initialState: {
   tasks: Task[]
   status: string
@@ -57,6 +74,24 @@ const taskSlice = createSlice({
   reducers: {
     reorderTasks(state, action: PayloadAction<Task[]>) {
       state.tasks = action.payload
+    },
+    togglePinnedTask(state, action: PayloadAction<string>) {
+      const task = state.tasks.find((task) => task.id === action.payload)
+
+      if (task) {
+        // Если задача уже закреплена, снимаем закрепление
+        if (task.pinned) {
+          task.pinned = false
+          console.log("Задача снята с закрепления")
+        } else {
+          // Если количество закрепленных задач меньше 3, закрепляем
+          console.log("Закрепляем задачу")
+          const pinnedTasks = state.tasks.filter((task) => task.pinned)
+          if (pinnedTasks.length < 3) {
+            task.pinned = true
+          }
+        }
+      }
     },
   },
   extraReducers: (builder) => {
@@ -89,5 +124,5 @@ const taskSlice = createSlice({
   },
 })
 
-export const { reorderTasks } = taskSlice.actions
+export const { reorderTasks, togglePinnedTask } = taskSlice.actions
 export default taskSlice.reducer

@@ -8,6 +8,8 @@ export interface Task {
 
 export interface TaskProps {
   task: Task
+  onPinToggle?: () => void
+  isPinned?: boolean
 }
 
 export interface TasksState {

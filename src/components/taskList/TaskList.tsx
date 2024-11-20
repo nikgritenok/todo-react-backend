@@ -36,6 +36,13 @@ export const TaskList = () => {
   const handleDragEnd = async (event: DragEndEvent) => {
     const { active, over } = event
 
+    // Проверяем, если задача закреплена, то не разрешаем перетаскивание
+    const draggedTask = tasks.find((task) => task.id === active.id)
+    if (draggedTask?.pinned) {
+      console.log("Задача закреплена, не разрешаем перетаскивание")
+      return // Если задача закреплена, прекращаем обработку
+    }
+
     if (over && active.id !== over.id) {
       const oldIndex = tasks.findIndex((task) => task.id === active.id)
       const newIndex = tasks.findIndex((task) => task.id === over.id)
@@ -87,7 +94,7 @@ export const TaskList = () => {
             strategy={verticalListSortingStrategy}
           >
             {sortedTasks.map((task) => (
-              <Task task={task} key={task.id} />
+              <Task task={task} key={task.id} isPinned={task.pinned} />
             ))}
           </SortableContext>
         )}
