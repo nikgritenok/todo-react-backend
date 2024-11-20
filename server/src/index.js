@@ -30,7 +30,7 @@ connect(mongoURI, {})
 app.get("/api/tasks", async (req, res) => {
   try {
     const tasks = await TaskModel.find()
-    res.json(tasks)
+    res.json({ tasks })
   } catch (error) {
     console.error(error)
     res.status(500).json({ message: "Failed to fetch tasks" })
