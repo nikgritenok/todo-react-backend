@@ -1,0 +1,35 @@
+.task-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-radius: 8px;
+  @include color();
+  background-color: #242320;
+  box-sizing: border-box;
+  margin: 20px 0 0 0;
+  cursor: pointer;
+  &:hover {
+    @include focus-color();
+  }
+  &-text {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    max-width: 80%;
+    color: #f0e3caa3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    h3 {
+      font-family: "Roboto";
+      font-size: 22px;
+      font-weight: 500;
+    }
+    p {
+      font-family: "Roboto";
+      font-size: 14px;
+    }
+  }
+}

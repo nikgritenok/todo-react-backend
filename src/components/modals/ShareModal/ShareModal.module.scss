@@ -1,0 +1,63 @@
+.modalContent {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 76px;
+  max-width: 400px;
+  background-color: $background-color;
+  border-radius: 8px 8px 0 0;
+
+  .share-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    max-width: 350px;
+    width: 100vw;
+    height: 48px;
+
+    button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 48px;
+      height: 48px;
+      background-color: #23221f;
+      border-radius: 100%;
+      border: #23221f;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #2a2926;
+    }
+  }
+}
+
+.modal-overlay {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: end;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7) !important;
+  overflow: hidden;
+  overflow-y: auto;
+  z-index: 999;
+  opacity: 0;
+  transition: opacity 200ms ease-in-out;
+}
+
+:global {
+  .ReactModal__Overlay--after-open {
+    opacity: 1;
+  }
+
+  .ReactModal__Overlay--before-close {
+    opacity: 0;
+  }
+}

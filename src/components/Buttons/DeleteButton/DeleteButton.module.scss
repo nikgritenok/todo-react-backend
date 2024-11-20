@@ -1,0 +1,12 @@
+.delete-button {
+  padding: 8px 12px;
+  @include color();
+  color: $border-color;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  box-sizing: border-box;
+  &:hover {
+    @include focus-color();
+  }
+}

@@ -1,0 +1,35 @@
+.task-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  height: 44px;
+  .block-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 124px;
+    height: 36px;
+    &__button {
+      width: 36px;
+      height: 36px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid $border-color;
+      background-color: $button-bg-color;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: "Roboto";
+      font-size: 16px;
+      font-weight: 700;
+      color: #ffffff;
+      img {
+        width: 14px;
+        height: 14px;
+      }
+    }
+    button:hover {
+      @include focus-color();
+    }
+  }
+}

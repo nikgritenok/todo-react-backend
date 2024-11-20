@@ -1,0 +1,73 @@
+@mixin button-styles {
+  font-family: "Roboto";
+  @include color();
+  color: #d9d9d9;
+  cursor: pointer;
+  border-radius: 4px;
+  min-width: 64px;
+}
+
+.modal-overlay {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7) !important;
+  overflow: hidden;
+  overflow-y: auto;
+  z-index: 999;
+  opacity: 0;
+  transition: opacity 200ms ease-in-out;
+}
+
+:global {
+  .ReactModal__Overlay--after-open {
+    opacity: 1;
+  }
+
+  .ReactModal__Overlay--before-close {
+    opacity: 0;
+  }
+}
+
+.modal-content {
+  max-width: 300px;
+  width: 100vw;
+  height: 150px;
+  background-color: $background-color;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  border-top: 3px solid $border-color;
+  border-radius: 4px;
+  span {
+    font-family: "Roboto";
+    color: #ffffff;
+  }
+  .delete-buttons {
+    .button {
+      @include button-styles;
+    }
+
+    .yes-button {
+      @extend .button;
+      margin-right: 10px;
+
+      &:hover {
+        @include focus-color();
+      }
+    }
+
+    .no-button {
+      @extend .button;
+      border: 1px solid $focus-color;
+      background-color: $background-color;
+    }
+  }
+}
