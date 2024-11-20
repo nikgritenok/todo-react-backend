@@ -21,6 +21,7 @@ import { Task } from "../TaskItem/TaskItem"
 import { fetchTasks, reorderTasksThunk } from "../../features/tasks/taskSlice"
 import styles from "./TaskList.module.scss"
 import { NoTaskMessage } from "../NoTaskMessage/NoTaskMessage"
+import { reorderTasks } from "../../features/tasks/taskSlice"
 
 export const TaskList = () => {
   const dispatch: AppDispatch = useDispatch()
@@ -40,18 +41,15 @@ export const TaskList = () => {
       const newIndex = tasks.findIndex((task) => task.id === over.id)
 
       if (oldIndex !== -1 && newIndex !== -1) {
-        // Переместить задачи в массиве
         const reorderedTasks = arrayMove(tasks, oldIndex, newIndex)
 
-        // Пересчитать индексы
         const updatedTasks = reorderedTasks.map((task, index) => ({
           ...task,
-          index, // Обновленный индекс
+          index,
         }))
 
-        console.log("updatedTasks", updatedTasks)
+        dispatch(reorderTasks(updatedTasks))
 
-        // Отправить новые задачи в Redux
         dispatch(reorderTasksThunk(updatedTasks))
       }
     }

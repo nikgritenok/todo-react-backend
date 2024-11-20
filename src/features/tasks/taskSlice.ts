@@ -32,14 +32,9 @@ export const updateTask = createAsyncThunk(
 
 export const reorderTasksThunk = createAsyncThunk(
   "tasks/reorderTasks",
-  async (tasks: Task[], { dispatch }) => {
+  async (tasks: Task[]) => {
     try {
-      console.log("tasks", tasks)
       await axios.put(`http://localhost:3000/tasks/reorder`, tasks)
-
-      const response = await axios.get(`${API_URL}`)
-
-      dispatch(reorderTasks(response.data))
     } catch (error) {
       console.error("Ошибка синхронизации порядка задач с сервером:", error)
     }
