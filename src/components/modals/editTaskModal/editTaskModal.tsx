@@ -1,5 +1,5 @@
 import { ModalProps } from "../../../features/tasks/taskTypes"
-import styles from "./editTaskModal.module.scss"
+import styles from "./EditTaskModal.module.scss"
 import Modal from "react-modal"
 import { useState, useEffect, useRef } from "react"
 import { useDispatch } from "react-redux"

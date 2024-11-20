@@ -1,4 +1,3 @@
-import React from "react"
 import icon_edit from "../../../assets/icon/icon_edit.svg"
 import styles from "./EditButton.module.scss"
 

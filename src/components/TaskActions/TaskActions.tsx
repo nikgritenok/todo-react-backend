@@ -1,5 +1,5 @@
-import React, { useState } from "react"
-import styles from "./taskActions.module.scss"
+import { useState } from "react"
+import styles from "./TaskActions.module.scss"
 import { ShareButton } from "../Buttons/ShareButton/ShareButton"
 import { EditButton } from "../Buttons/EditButton/EditButton"
 import { InfoButton } from "../Buttons/InfoButton/InfoButton"

@@ -1,10 +1,10 @@
 import express, { json } from "express"
 import { connect } from "mongoose"
 import cors from "cors"
-import dotenv from "dotenv"
+import { config } from "dotenv"
 import { TaskModel } from "./models/Tasks.js"
 
-dotenv.config()
+config()
 
 const app = express()
 const PORT = process.env.PORT || 3000

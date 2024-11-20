@@ -1,6 +1,6 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import { TaskProps } from "../../features/tasks/taskTypes"
-import styles from "./taskItem.module.scss"
+import styles from "./TaskItem.module.scss"
 import { useSortable } from "@dnd-kit/sortable"
 import { TaskActions } from "../TaskActions/TaskActions"
 import { DeleteButton } from "../Buttons/DeleteButton/DeleteButton"

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react"
+import { useState, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import styles from "./TaskInput.module.scss"
 import { addTask } from "../../features/tasks/taskSlice"

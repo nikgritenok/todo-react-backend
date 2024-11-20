@@ -1,4 +1,3 @@
-import React from "react"
 import icon_share from "../../../assets/icon/icon_share.svg"
 import styles from "./ShareButton.module.scss"
 

@@ -1,6 +1,6 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import { EditTaskModal } from "../../modals/EditTaskModal/EditTaskModal"
-import styles from "./infoButton.module.scss"
+import styles from "./InfoButton.module.scss"
 import { TaskProps } from "../../../features/tasks/taskTypes"
 
 export const InfoButton: React.FC<TaskProps> = ({ task }) => {

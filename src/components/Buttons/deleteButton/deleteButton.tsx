@@ -1,5 +1,4 @@
-import React from "react"
-import styles from "./deleteButton.module.scss"
+import styles from "./DeleteButton.module.scss"
 
 interface DeleteButtonProps {
   onClick: (e: React.MouseEvent) => void

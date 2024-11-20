@@ -1,5 +1,5 @@
 import { ModalProps } from "../../../features/tasks/taskTypes"
-import styles from "./deleteTaskModal.module.scss"
+import styles from "./DeleteTaskModal.module.scss"
 import Modal from "react-modal"
 import { useDispatch } from "react-redux"
 import { deleteTask } from "../../../features/tasks/taskSlice"

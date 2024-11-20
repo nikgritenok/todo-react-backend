@@ -1,4 +1,4 @@
-import styles from "./noTaskMessage.module.scss"
+import styles from "./NoTaskMessage.module.scss"
 
 export const NoTaskMessage = () => {
   return (
