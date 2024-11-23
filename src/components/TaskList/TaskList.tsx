@@ -1,27 +1,31 @@
-import { useEffect } from "react"
-import { useSelector, useDispatch } from "react-redux"
+import { AppDispatch, RootState } from "../../store"
 import {
-  closestCorners,
   DndContext,
   DragEndEvent,
   MouseSensor,
   PointerSensor,
   TouchSensor,
+  closestCorners,
   useSensor,
   useSensors,
 } from "@dnd-kit/core"
 import {
   SortableContext,
-  verticalListSortingStrategy,
   arrayMove,
+  verticalListSortingStrategy,
 } from "@dnd-kit/sortable"
-import { restrictToWindowEdges } from "@dnd-kit/modifiers"
-import { AppDispatch, RootState } from "../../store"
-import { Task } from "../TaskItem/TaskItem"
-import { fetchTasks, reorderTasksThunk } from "../../features/tasks/taskSlice"
-import styles from "./TaskList.module.scss"
+import {
+  fetchTasks,
+  reorderTasks,
+  reorderTasksThunk,
+} from "../../features/tasks/taskSlice"
+import { useDispatch, useSelector } from "react-redux"
+
 import { NoTaskMessage } from "../NoTaskMessage/NoTaskMessage"
-import { reorderTasks } from "../../features/tasks/taskSlice"
+import { Task } from "../TaskItem/TaskItem"
+import { restrictToWindowEdges } from "@dnd-kit/modifiers"
+import styles from "./TaskList.module.scss"
+import { useEffect } from "react"
 
 export const TaskList = () => {
   const dispatch: AppDispatch = useDispatch()

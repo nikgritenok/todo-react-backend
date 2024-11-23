@@ -1,6 +1,7 @@
-import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit"
-import axios from "axios"
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+
 import { Task } from "../../features/tasks/taskTypes"
+import axios from "axios"
 
 const API_URL = "http://localhost:3000/api/tasks"
 
